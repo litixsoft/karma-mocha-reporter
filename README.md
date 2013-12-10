@@ -1,10 +1,11 @@
 # karma-mocha-reporter
 
 > Karma reporter plugin with mocha style logging.
+
 > [![Build Status](https://travis-ci.org/litixsoft/karma-mocha-reporter.png?branch=master)](https://travis-ci.org/litixsoft/karma-mocha-reporter) [![david-dm](https://david-dm.org/litixsoft/karma-mocha-reporter.png)](https://david-dm.org/litixsoft/karma-mocha-reporter/) [![david-dm](https://david-dm.org/litixsoft/karma-mocha-reporter/dev-status.png)](https://david-dm.org/litixsoft/karma-mocha-reporter#info=devDependencies&view=table)
 
 ## How does it look like
-[![screenshot](demo/screen.png)]
+![screenshot](demo/screen.png)
 
 ## Installation
 The easiest way is to keep `karma-mocha-reporter` as a devDependency in your `package.json`.
