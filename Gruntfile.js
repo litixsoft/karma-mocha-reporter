@@ -58,7 +58,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-karma');
 
     // Register tasks.
-    grunt.registerTask('test', ['jshint']);
+    grunt.registerTask('test', ['copy:demo', 'jshint', 'karma:success']);
     grunt.registerTask('demo', ['copy:demo', 'karma:singleBrowser', 'karma:demo', 'karma:success', 'karma:noColors']);
     grunt.registerTask('short', ['copy:demo', 'karma:short']);
 

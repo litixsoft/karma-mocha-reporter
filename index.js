@@ -13,6 +13,7 @@ var MochaReporter = function (baseReporterDecorator, config) {
     baseReporterDecorator(this);
 
     var self = this;
+    var firstRun = true;
 
     /**
      * Format the text with color when the colored output is enabled in the karma config.
@@ -71,6 +72,11 @@ var MochaReporter = function (baseReporterDecorator, config) {
         var keys = Object.keys(suite);
         var length = keys.length;
         var i, item;
+
+        if (firstRun) {
+            self.write('\nStart:'.underline.bold + '\n');
+            firstRun = false;
+        }
 
         for (i = 0; i < length; i++) {
             item = suite[keys[i]];

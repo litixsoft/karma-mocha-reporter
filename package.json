@@ -51,6 +51,7 @@
     "readmeFilename": "README.md",
     "main": "index.js",
     "scripts": {
+        "test": "grunt test",
         "demo": "grunt demo --force"
     },
     "peerDependencies": {
