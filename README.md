@@ -13,7 +13,7 @@ The easiest way is to keep `karma-mocha-reporter` as a devDependency in your `pa
 {
   "devDependencies": {
     "karma": "~0.10",
-    "karma-mocha-reporter": "~0.1.0"
+    "karma-mocha-reporter": "~0.2.0"
   }
 }
 ```
@@ -50,6 +50,9 @@ grunt demo --force
 ```
 
 ## Release History
+### v0.2.0
+* replace dependency color.js with chalk.js
+
 ### v0.1.0
 * first release
 
