@@ -1,5 +1,5 @@
 'use strict';
-require('colors');
+var chalk = require('chalk');
 
 /**
  * The MochaReporter.
@@ -15,6 +15,11 @@ var MochaReporter = function (baseReporterDecorator, config) {
     var self = this;
     var firstRun = true;
 
+    // disable chalk when colors is set to false
+    if (config.colors === false) {
+        chalk.enabled = false;
+    }
+
     /**
      * Format the text with color when the colored output is enabled in the karma config.
      *
@@ -22,9 +27,9 @@ var MochaReporter = function (baseReporterDecorator, config) {
      * @param {!string} color The color or format.
      * @returns {string}
      */
-    function colorfy (text, color) {
-        return config.colors === true ? text[color] : text;
-    }
+//    function colorfy (text, color) {
+//        return config.colors === true ? text[color] : text;
+//    }
 
     /**
      * Returns a formatted time interval
@@ -74,7 +79,7 @@ var MochaReporter = function (baseReporterDecorator, config) {
         var i, item;
 
         if (firstRun) {
-            self.write('\nStart:'.underline.bold + '\n');
+            self.write(chalk.underline.bold('\nStart:') + '\n');
             firstRun = false;
         }
 
@@ -95,14 +100,14 @@ var MochaReporter = function (baseReporterDecorator, config) {
                 if (item.type === 'it') {
                     if (item.skipped) {
                         // print skipped tests grey
-                        line = colorfy(line + ' (skipped)', 'grey');
+                        line = chalk.gray(line + ' (skipped)');
                     } else {
                         // set color to green or red
-                        line = item.success ? colorfy(line, 'green') : colorfy(line, 'red');
+                        line = item.success ? chalk.green(line) : chalk.red(line);
                     }
                 } else {
                     // print name of a suite block in bold
-                    line = line.bold;
+                    line = chalk.bold(line);
                 }
 
                 // use write method of baseReporter
@@ -146,13 +151,13 @@ var MochaReporter = function (baseReporterDecorator, config) {
                 // it block
                 if (item.type === 'it') {
                     // make item name red
-                    line = colorfy(line, 'red') + '\n';
+                    line = chalk.red(line) + '\n';
 
                     // add all browser in which the test failed with color yellow
-                    line += repeatString('  ', depth + 1) + colorfy(item.failed.join('\n' + repeatString('  ', depth + 1)).italic, 'yellow') + '\n';
+                    line += repeatString('  ', depth + 1) + chalk.italic.yellow(item.failed.join('\n' + repeatString('  ', depth + 1))) + '\n';
 
                     // add the error log in red
-                    line += repeatString('  ', depth) + colorfy((item.log || [])[0], 'red') + '\n';
+                    line += repeatString('  ', depth) + chalk.red((item.log || [])[0]) + '\n';
                 }
 
                 // use write method of baseReporter
@@ -212,7 +217,7 @@ var MochaReporter = function (baseReporterDecorator, config) {
 
                 if (config.reportSlowerThan && result.time > config.reportSlowerThan) {
                     // add slow report warning
-                    item.name += colorfy((' (slow: ' + formatTimeInterval(result.time) + ')'), 'yellow');
+                    item.name += chalk.yellow((' (slow: ' + formatTimeInterval(result.time) + ')'));
                     self.numberOfSlowTests++;
                 }
 
@@ -245,23 +250,23 @@ var MochaReporter = function (baseReporterDecorator, config) {
     };
 
     self.onRunComplete = function (browsers, results) {
-        self.write(colorfy('\nFinished in ' + formatTimeInterval(self.totalTime) + '\n\n', 'green'));
+        self.write(chalk.green('\nFinished in ' + formatTimeInterval(self.totalTime) + '\n\n'));
 
         if (browsers.length > 0 && !results.error && !results.disconnected) {
-            self.write('SUMMARY:'.underline.bold + '\n');
-            self.write(colorfy('✓ ' + results.success + ' tests completed\n', 'green'));
+            self.write(chalk.underline.bold('SUMMARY:') + '\n');
+            self.write(chalk.green('✓ ' + results.success + ' tests completed\n'));
 
             if (self.numberOfSkippedTests > 0) {
-                self.write(colorfy('- ' + self.numberOfSkippedTests + ' tests skipped\n', 'grey'));
+                self.write(chalk.grey('- ' + self.numberOfSkippedTests + ' tests skipped\n'));
             }
 
             if (self.numberOfSlowTests > 0) {
-                self.write(colorfy('- ' + self.numberOfSlowTests + ' tests slow\n', 'yellow'));
+                self.write(chalk.yellow('- ' + self.numberOfSlowTests + ' tests slow\n'));
             }
 
             if (results.failed) {
-                self.write(colorfy('✗ ' + results.failed + ' tests failed\n', 'red'));
-                self.write('\nFAILED TESTS:'.underline.bold + '\n');
+                self.write(chalk.red('✗ ' + results.failed + ' tests failed\n'));
+                self.write(chalk.underline.bold('\nFAILED TESTS:') + '\n');
 
                 printFailures(self.allResults);
             }
