@@ -50,6 +50,9 @@ grunt demo --force
 ```
 
 ## Release History
+### v0.2.1
+* make reporter compatible with karma 0.11
+
 ### v0.2.0
 * replace dependency color.js with chalk.js
 

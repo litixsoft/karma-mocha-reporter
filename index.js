@@ -242,11 +242,17 @@ var MochaReporter = function (baseReporterDecorator, config) {
     };
 
     self.onRunStart = function (browsers) {
+        self._browsers = [];
         self.allResults = {};
         self.totalTime = 0;
         self.numberOfSlowTests = 0;
         self.numberOfSkippedTests = 0;
         self.numberOfBrowsers = (browsers || []).length;
+    };
+
+    self.onBrowserStart = function (browser) {
+        self._browsers.push(browser);
+        self.numberOfBrowsers += 1;
     };
 
     self.onRunComplete = function (browsers, results) {
