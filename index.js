@@ -144,7 +144,7 @@ var MochaReporter = function (baseReporterDecorator, config) {
             }
 
             // only print to output when test failed
-            if (item.name && !item.success) {
+            if (item.name && !item.success && !item.skipped) {
                 // indent
                 var line = repeatString('  ', depth) + item.name;
 
