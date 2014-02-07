@@ -50,6 +50,9 @@ grunt demo --force
 ```
 
 ## Release History
+### v0.2.2
+* fix that skipped test where reported as failure
+
 ### v0.2.1
 * make reporter compatible with karma 0.11
 
