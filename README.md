@@ -2,7 +2,7 @@
 
 > Karma reporter plugin with mocha style logging.
 
-> [![Build Status](https://travis-ci.org/litixsoft/karma-mocha-reporter.png?branch=master)](https://travis-ci.org/litixsoft/karma-mocha-reporter) [![david-dm](https://david-dm.org/litixsoft/karma-mocha-reporter.png)](https://david-dm.org/litixsoft/karma-mocha-reporter/) [![david-dm](https://david-dm.org/litixsoft/karma-mocha-reporter/dev-status.png)](https://david-dm.org/litixsoft/karma-mocha-reporter#info=devDependencies&view=table)
+> [![Build Status](https://travis-ci.org/litixsoft/karma-mocha-reporter.svg?branch=master)](https://travis-ci.org/litixsoft/karma-mocha-reporter) [![david-dm](https://david-dm.org/litixsoft/karma-mocha-reporter.svg)](https://david-dm.org/litixsoft/karma-mocha-reporter/) [![david-dm](https://david-dm.org/litixsoft/karma-mocha-reporter/dev-status.svg)](https://david-dm.org/litixsoft/karma-mocha-reporter#info=devDependencies&view=table)
 
 ## How does it look like
 ![screenshot](demo/screen.png)
@@ -12,8 +12,8 @@ The easiest way is to keep `karma-mocha-reporter` as a devDependency in your `pa
 ```json
 {
   "devDependencies": {
-    "karma": "~0.10",
-    "karma-mocha-reporter": "~0.2.0"
+    "karma": "^0.12",
+    "karma-mocha-reporter": "^0.2.0"
   }
 }
 ```
@@ -66,7 +66,7 @@ grunt demo --force
 [Litixsoft GmbH](http://www.litixsoft.de)
 
 ## License
-Copyright (C) 2013 Litixsoft GmbH <info@litixsoft.de>
+Copyright (C) 2013-2014 Litixsoft GmbH <info@litixsoft.de>
 Licensed under the MIT license.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

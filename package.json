@@ -2,32 +2,17 @@
     "name": "karma-mocha-reporter",
     "description": "Karma reporter with mocha style logging.",
     "version": "0.2.2",
-    "homepage": "https://github.com/litixsoft/karma-mocha-reporter",
-    "author": {
-        "name": "Litixsoft GmbH",
-        "email": "info@litixsoft.de"
-    },
+    "homepage": "http://www.litixsoft.de/modules-karmamochareporter",
+    "author": "Litixsoft GmbH <info@litixsoft.de> (http://www.litixsoft.de)",
     "maintainers": [
-        {
-            "name": "Timo Liebetrau",
-            "email": "t.liebetrau@litixsoft.de"
-        },
-        {
-            "name": "Marco Kannenberg",
-            "email": "m.kannenberg@litixsoft.de"
-        },
-        {
-            "name": "Andreas Krummsdorf",
-            "email": "a.krummsdorf@litixsoft.de"
-        },
-        {
-            "name": "Sven Bernstein",
-            "email": "s.bernstein@litixsoft.de"
-        },
-        {
-            "name": "Thomas Scheibe",
-            "email": "th.scheibe@litixsoft.de"
-        }
+        "Timo Liebetrau <t.liebetrau@litixsoft.de>",
+        "Marco Kannenberg <m.kannenberg@litixsoft.de>",
+        "Sven Bernstein <s.bernstein@litixsoft.de>",
+        "Dominic Sachs <d.sachs@litixsoft.de>",
+        "Thomas Scheibe <th.scheibe@litixsoft.de>",
+        "Mike Alig <m.alig@litixsoft.de>",
+        "Joerg Raschke <j.Raschke@litixsoft.de>",
+        "Andreas Krummsdorf <a.krummsdorf@litixsoft.de>"
     ],
     "repository": {
         "type": "git",
@@ -48,11 +33,9 @@
             "url": "https://github.com/litixsoft/karma-mocha-reporter/blob/master/LICENSE"
         }
     ],
-    "readmeFilename": "README.md",
     "main": "index.js",
     "scripts": {
-        "test": "grunt test",
-        "demo": "grunt demo --force"
+        "test": "grunt test"
     },
     "peerDependencies": {
         "karma": ">=0.9"
