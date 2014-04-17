@@ -69,7 +69,7 @@ module.exports = function (grunt) {
     grunt.registerTask('test', ['copy:demo', 'jshint', 'karma:success']);
     grunt.registerTask('demo', ['copy:demo', 'karma:singleBrowser', 'karma:demo', 'karma:success', 'karma:noColors']);
     grunt.registerTask('short', ['copy:demo', 'karma:short']);
-    grunt.registerTask('a', ['copy:demo', 'karma:singleRun']);
+    grunt.registerTask('single', ['copy:demo', 'karma:singleRun']);
 
     // Default task.
     grunt.registerTask('default', ['test']);

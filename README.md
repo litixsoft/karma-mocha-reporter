@@ -50,6 +50,9 @@ grunt demo --force
 ```
 
 ## Release History
+### v0.2.3
+* fix missing test results when singleRun = true
+
 ### v0.2.2
 * fix that skipped test where reported as failure
 
