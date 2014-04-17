@@ -48,6 +48,14 @@ module.exports = function (grunt) {
                 detectBrowsers: {
                     enabled: false
                 }
+            },
+            singleRun: {
+                configFile: 'demo/karma.conf.js',
+                singleRun: false,
+                autoWatch: true,
+                detectBrowsers: {
+                    enabled: false
+                }
             }
         }
     });
@@ -61,6 +69,7 @@ module.exports = function (grunt) {
     grunt.registerTask('test', ['copy:demo', 'jshint', 'karma:success']);
     grunt.registerTask('demo', ['copy:demo', 'karma:singleBrowser', 'karma:demo', 'karma:success', 'karma:noColors']);
     grunt.registerTask('short', ['copy:demo', 'karma:short']);
+    grunt.registerTask('a', ['copy:demo', 'karma:singleRun']);
 
     // Default task.
     grunt.registerTask('default', ['test']);

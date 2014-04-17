@@ -21,17 +21,6 @@ var MochaReporter = function (baseReporterDecorator, config) {
     }
 
     /**
-     * Format the text with color when the colored output is enabled in the karma config.
-     *
-     * @param {!string} text The text to format.
-     * @param {!string} color The color or format.
-     * @returns {string}
-     */
-//    function colorfy (text, color) {
-//        return config.colors === true ? text[color] : text;
-//    }
-
-    /**
      * Returns a formatted time interval
      *
      * @param {!number} time The time.
@@ -252,7 +241,7 @@ var MochaReporter = function (baseReporterDecorator, config) {
 
     self.onBrowserStart = function (browser) {
         self._browsers.push(browser);
-        self.numberOfBrowsers += 1;
+        self.numberOfBrowsers = self._browsers.length;
     };
 
     self.onRunComplete = function (browsers, results) {
