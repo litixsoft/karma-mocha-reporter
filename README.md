@@ -50,6 +50,11 @@ grunt demo --force
 ```
 
 ## Release History
+### v0.2.4
+* better browser names formatting
+* fix calculating describe items' success
+* use karma's error formatter
+
 ### v0.2.3
 * fix missing test results when singleRun = true
 
