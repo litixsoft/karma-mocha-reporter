@@ -143,7 +143,10 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
                     line = chalk.red(line) + '\n';
 
                     // add all browser in which the test failed with color yellow
-                    line += repeatString('  ', depth + 1) + chalk.italic.yellow(item.failed.join('\n' + repeatString('  ', depth + 1))) + '\n';
+                    for(var bi = 0; bi < item.failed.length; bi++) {
+                      var browserName = item.failed[bi];
+                      line += repeatString('  ', depth + 1) + chalk.italic.yellow(browserName) + '\n';
+                    }
 
                     // add the error log in red
                     line += chalk.red(formatError((item.log||[])[0], repeatString('  ',depth)));
