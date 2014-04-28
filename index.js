@@ -8,7 +8,7 @@ var chalk = require('chalk');
  * @param {!object} config The karma config.
  * @constructor
  */
-var MochaReporter = function (baseReporterDecorator, config) {
+var MochaReporter = function (baseReporterDecorator, formatError, config) {
     // extend the base reporter
     baseReporterDecorator(this);
 
@@ -143,10 +143,13 @@ var MochaReporter = function (baseReporterDecorator, config) {
                     line = chalk.red(line) + '\n';
 
                     // add all browser in which the test failed with color yellow
-                    line += repeatString('  ', depth + 1) + chalk.italic.yellow(item.failed.join('\n' + repeatString('  ', depth + 1))) + '\n';
+                    for(var bi = 0; bi < item.failed.length; bi++) {
+                      var browserName = item.failed[bi];
+                      line += repeatString('  ', depth + 1) + chalk.italic.yellow(browserName) + '\n';
+                    }
 
                     // add the error log in red
-                    line += repeatString('  ', depth) + chalk.red((item.log || [])[0]) + '\n';
+                    line += chalk.red(formatError((item.log||[])[0], repeatString('  ',depth)));
                 }
 
                 // use write method of baseReporter
@@ -270,7 +273,7 @@ var MochaReporter = function (baseReporterDecorator, config) {
 };
 
 // inject karma runner baseReporter and config
-MochaReporter.$inject = ['baseReporterDecorator', 'config'];
+MochaReporter.$inject = ['baseReporterDecorator', 'formatError', 'config'];
 
 // PUBLISH DI MODULE
 module.exports = {
