@@ -179,7 +179,7 @@ var MochaReporter = function (baseReporterDecorator, config) {
             item.isRoot = depth === 0;
             item.type = 'describe';
             item.skipped = result.skipped;
-            item.success = item.success === undefined ? true : item.success && result.success;
+            item.success = (item.success === undefined ? true : item.success) && result.success;
 
             // it block
             if (depth === maxDepth) {
