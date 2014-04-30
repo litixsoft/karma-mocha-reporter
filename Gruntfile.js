@@ -56,6 +56,15 @@ module.exports = function (grunt) {
                 detectBrowsers: {
                     enabled: false
                 }
+            },
+            fail: {
+                configFile: 'demo/karma.conf.js',
+                options: {
+                    files: ['demo/fail.spec.js']
+                },
+                detectBrowsers: {
+                    enabled: false
+                }
             }
         }
     });
@@ -67,9 +76,10 @@ module.exports = function (grunt) {
 
     // Register tasks.
     grunt.registerTask('test', ['copy:demo', 'jshint', 'karma:success']);
-    grunt.registerTask('demo', ['copy:demo', 'karma:singleBrowser', 'karma:demo', 'karma:success', 'karma:noColors']);
+    grunt.registerTask('demo', ['copy:demo', 'karma:singleBrowser', 'karma:demo', 'karma:success', 'karma:noColors', 'karma:fail']);
     grunt.registerTask('short', ['copy:demo', 'karma:short']);
     grunt.registerTask('single', ['copy:demo', 'karma:singleRun']);
+    grunt.registerTask('fail', ['copy:demo', 'karma:fail']);
 
     // Default task.
     grunt.registerTask('default', ['test']);

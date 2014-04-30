@@ -5,6 +5,7 @@ var chalk = require('chalk');
  * The MochaReporter.
  *
  * @param {!object} baseReporterDecorator The karma base reporter.
+ * @param {!Function} formatError The karma function to format an error.
  * @param {!object} config The karma config.
  * @constructor
  */
@@ -143,13 +144,13 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
                     line = chalk.red(line) + '\n';
 
                     // add all browser in which the test failed with color yellow
-                    for(var bi = 0; bi < item.failed.length; bi++) {
-                      var browserName = item.failed[bi];
-                      line += repeatString('  ', depth + 1) + chalk.italic.yellow(browserName) + '\n';
+                    for (var bi = 0; bi < item.failed.length; bi++) {
+                        var browserName = item.failed[bi];
+                        line += repeatString('  ', depth + 1) + chalk.italic.yellow(browserName) + '\n';
                     }
 
                     // add the error log in red
-                    line += chalk.red(formatError((item.log||[])[0], repeatString('  ',depth)));
+                    line += chalk.red(formatError((item.log || [])[0], repeatString('  ', depth)));
                 }
 
                 // use write method of baseReporter
@@ -250,7 +251,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
     self.onRunComplete = function (browsers, results) {
         self.write(chalk.green('\nFinished in ' + formatTimeInterval(self.totalTime) + '\n\n'));
 
-        if (browsers.length > 0 && !results.error && !results.disconnected) {
+        if (browsers.length > 0 && !results.disconnected) {
             self.write(chalk.underline.bold('SUMMARY:') + '\n');
             self.write(chalk.green('✓ ' + results.success + ' tests completed\n'));
 
