@@ -50,6 +50,9 @@ grunt demo --force
 ```
 
 ## Release History
+### v0.2.5
+* results summary is now also printed when all tests fail
+
 ### v0.2.4
 * better browser names formatting
 * fix calculating describe items' success
