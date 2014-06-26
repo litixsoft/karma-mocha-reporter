@@ -1,7 +1,7 @@
 {
     "name": "karma-mocha-reporter",
     "description": "Karma reporter with mocha style logging.",
-    "version": "0.2.5",
+    "version": "0.2.6",
     "homepage": "http://www.litixsoft.de/modules-karmamochareporter",
     "author": "Litixsoft GmbH <info@litixsoft.de> (http://www.litixsoft.de)",
     "maintainers": [

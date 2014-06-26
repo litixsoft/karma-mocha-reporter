@@ -50,6 +50,9 @@ grunt demo --force
 ```
 
 ## Release History
+### v0.2.6
+* don't crash when the name of the describe or it block is a reserved object property (e.g. constructor, toString)
+
 ### v0.2.5
 * results summary is now also printed when all tests fail
 
