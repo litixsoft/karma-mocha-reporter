@@ -165,6 +165,34 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
     }
 
     /**
+     * Returns all properties of the given object
+     *
+     * @param {!Object} obj
+     * @returns {Array}
+     */
+    function listAllObjectProperties (obj) {
+        var objectToInspect;
+        var result = [];
+
+        for (objectToInspect = obj; objectToInspect !== null; objectToInspect = Object.getPrototypeOf(objectToInspect)) {
+            result = result.concat(Object.getOwnPropertyNames(objectToInspect));
+        }
+
+        return result;
+    }
+
+    /**
+     * Returns if the property is an reserverd object property
+     *
+     * @param {!Object} obj
+     * @param {!String} property
+     * @returns {boolean}
+     */
+    function isReservedProperty (obj, property) {
+        return listAllObjectProperties(Object.getPrototypeOf(obj)).indexOf(property) > -1;
+    }
+
+    /**
      * Called each time a test is completed in a given browser.
      *
      * @param {!object} browser The current browser.
@@ -176,6 +204,11 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
         var maxDepth = path.length - 1;
 
         path.reduce(function (suite, description, depth) {
+            if (isReservedProperty(suite, description)) {
+                self.write(chalk.yellow('Reserved name for ' + (depth === maxDepth ? 'it' : 'describe') + ' block (' + description + ')! Please use an other name, othwerwhise the result are not printed correctly\n'));
+                return {};
+            }
+
             var item = suite[description] || {};
             suite[description] = item;
 
