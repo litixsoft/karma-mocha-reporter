@@ -224,10 +224,10 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
                 item.count = item.count || 0;
                 item.count++;
                 item.failed = item.failed || [];
-                item.name = result.success ? '✓ ' + item.name : '✗ ' + item.name;
+                item.name = (result.success ? '✓ ' : '✗ ') + item.name;
                 item.success = result.success;
                 item.skipped = result.skipped;
-                self.totalTime += result.time;
+                self.netTime += result.time;
 
                 if (result.skipped) {
                     self.numberOfSkippedTests++;
@@ -271,6 +271,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
         self._browsers = [];
         self.allResults = {};
         self.totalTime = 0;
+        self.netTime = 0;
         self.numberOfSlowTests = 0;
         self.numberOfSkippedTests = 0;
         self.numberOfBrowsers = (browsers || []).length;
@@ -282,7 +283,11 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
     };
 
     self.onRunComplete = function (browsers, results) {
-        self.write(chalk.green('\nFinished in ' + formatTimeInterval(self.totalTime) + '\n\n'));
+        browsers.forEach(function(browser){
+            self.totalTime += browser.lastResult.totalTime;
+        });
+
+        self.write(chalk.green('\nFinished in ' + formatTimeInterval(self.totalTime) + ' / ' + formatTimeInterval(self.netTime) + '\n\n'));
 
         if (browsers.length > 0 && !results.disconnected) {
             self.write(chalk.underline.bold('SUMMARY:') + '\n');
