@@ -50,6 +50,9 @@ grunt demo --force
 ```
 
 ## Release History
+### v0.2.7
+* report totalTime and netTime the same way "dots" and "progress" reporters do
+
 ### v0.2.6
 * don't crash when the name of the describe or it block is a reserved object property (e.g. constructor, toString)
 
