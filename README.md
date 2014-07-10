@@ -51,6 +51,9 @@ You can preview your changes by running:
     $ grunt demo --force
 
 ## Release History
+### v0.2.8
+* add module log-symbols for printing symbols to the console
+
 ### v0.2.7
 * report totalTime and netTime the same way "dots" and "progress" reporters do
 
