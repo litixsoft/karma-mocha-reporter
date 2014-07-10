@@ -1,5 +1,6 @@
 'use strict';
 var chalk = require('chalk');
+var logSymbols = require('log-symbols');
 
 /**
  * The MochaReporter.
@@ -224,7 +225,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
                 item.count = item.count || 0;
                 item.count++;
                 item.failed = item.failed || [];
-                item.name = (result.success ? '✓ ' : '✗ ') + item.name;
+                item.name = (result.success ? logSymbols.success : logSymbols.error) + ' ' + item.name;
                 item.success = result.success;
                 item.skipped = result.skipped;
                 self.netTime += result.time;
@@ -291,18 +292,18 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
 
         if (browsers.length > 0 && !results.disconnected) {
             self.write(chalk.underline.bold('SUMMARY:') + '\n');
-            self.write(chalk.green('✓ ' + results.success + ' tests completed\n'));
+            self.write(chalk.green(logSymbols.success + ' ' + results.success + ' tests completed\n'));
 
             if (self.numberOfSkippedTests > 0) {
-                self.write(chalk.grey('- ' + self.numberOfSkippedTests + ' tests skipped\n'));
+                self.write(chalk.grey(logSymbols.info + ' ' + self.numberOfSkippedTests + ' tests skipped\n'));
             }
 
             if (self.numberOfSlowTests > 0) {
-                self.write(chalk.yellow('- ' + self.numberOfSlowTests + ' tests slow\n'));
+                self.write(chalk.yellow(logSymbols.warning + ' ' + self.numberOfSlowTests + ' tests slow\n'));
             }
 
             if (results.failed) {
-                self.write(chalk.red('✗ ' + results.failed + ' tests failed\n'));
+                self.write(chalk.red(logSymbols.error + ' ' + results.failed + ' tests failed\n'));
                 self.write(chalk.underline.bold('\nFAILED TESTS:') + '\n');
 
                 printFailures(self.allResults);

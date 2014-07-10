@@ -94,6 +94,10 @@ describe('A demo test suite', function () {
         });
     });
 
+    xit('should be skipped', function () {
+        expect(true).toBeTruthy();
+    });
+
     it('1.4.0 should fail', function () {
         expect(true).toBeFalsy();
     });

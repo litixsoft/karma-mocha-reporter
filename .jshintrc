@@ -18,6 +18,7 @@
         "describe": false,
         "expect": false,
         "it": false,
+        "xit": false,
         "xdescribe": false
     }
 }

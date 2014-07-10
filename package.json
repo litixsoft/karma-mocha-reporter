@@ -53,6 +53,7 @@
         "karma-jasmine": "^0.1.5"
     },
     "dependencies": {
-        "chalk": "^0.5.0"
+        "chalk": "^0.5.1",
+        "log-symbols": "^1.0.0"
     }
 }
