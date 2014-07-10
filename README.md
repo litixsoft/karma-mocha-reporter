@@ -8,7 +8,7 @@
 [![david-dm](https://david-dm.org/litixsoft/karma-mocha-reporter/dev-status.svg?theme=shields.io)](https://david-dm.org/litixsoft/karma-mocha-reporter#info=devDependencies&view=table)
 
 ## How does it look like
-[![screenshot](demo/screen.png)]
+![screenshot](demo/screen.png)
 
 ## Installation
 The easiest way is to keep `karma-mocha-reporter` as a devDependency in your `package.json`.
@@ -22,9 +22,8 @@ The easiest way is to keep `karma-mocha-reporter` as a devDependency in your `pa
 ```
 
 You can simple do it by:
-```bash
-npm install karma-mocha-reporter --save-dev
-```
+
+    $ npm install karma-mocha-reporter --save-dev
 
 ## Configuration
 ```js
@@ -48,9 +47,8 @@ module.exports = function(config) {
 In lieu of a formal styleguide take care to maintain the existing coding style. Lint and test your code using [grunt](http://gruntjs.com/).
 
 You can preview your changes by running:
-```bash
-grunt demo --force
-```
+
+    $ grunt demo --force
 
 ## Release History
 ### v0.2.7
