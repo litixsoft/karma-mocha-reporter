@@ -16,6 +16,16 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
 
     var self = this;
     var firstRun = true;
+    var verboseFirstRun = false;
+
+    if (config.mochaReporter === undefined) {
+        config.mochaReporter = {};
+    }
+
+    if (config.mochaReporter.abbreviatePassing === 'exceptFirst') {
+        verboseFirstRun = true;
+        config.mochaReporter.abbreviatePassing = false;
+    }
 
     // disable chalk when colors is set to false
     if (config.colors === false) {
@@ -83,7 +93,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
             }
 
             // only print to output once
-            if (item.name && !item.printed) {
+            if (item.name && !item.printed && item.shouldPrint) {
                 // indent
                 var line = repeatString('  ', depth) + item.name;
 
@@ -203,8 +213,10 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
         // complete path of the test
         var path = [].concat(result.suite, result.description);
         var maxDepth = path.length - 1;
+        var failingSuite = false;
 
         path.reduce(function (suite, description, depth) {
+
             if (isReservedProperty(suite, description)) {
                 self.write(chalk.yellow('Reserved name for ' + (depth === maxDepth ? 'it' : 'describe') + ' block (' + description + ')! Please use an other name, othwerwhise the result are not printed correctly\n'));
                 return {};
@@ -218,6 +230,13 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
             item.type = 'describe';
             item.skipped = result.skipped;
             item.success = (item.success === undefined ? true : item.success) && result.success;
+
+            if(item.isRoot) {
+                failingSuite = !item.success;
+            }
+            item.shouldPrint = !config.mochaReporter.abbreviatePassing ||
+                !config.mochaReporter.abbreviateAggressively && item.isRoot ||
+                failingSuite;
 
             // it block
             if (depth === maxDepth) {
@@ -246,6 +265,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
                     // add slow report warning
                     item.name += chalk.yellow((' (slow: ' + formatTimeInterval(result.time) + ')'));
                     self.numberOfSlowTests++;
+                    item.shouldPrint = true;
                 }
 
                 if (item.count === self.numberOfBrowsers) {
@@ -308,6 +328,10 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
 
                 printFailures(self.allResults);
             }
+        }
+
+        if (verboseFirstRun) {
+            config.mochaReporter.abbreviatePassing = true;
         }
     };
 };
