@@ -35,6 +35,17 @@ module.exports = function(config) {
     // reporters configuration
     reporters: ['mocha'],
 
+    mochaReporter: {
+      // If true, passing suites will only have their titles printed,
+      // and individual specs will be skipped. Default is false.
+      abbreviatePassing: false;
+
+      // If true and abbreviatePassing is set, passing suites will be
+      // skipped completely. Thus for a fully green suite, you will only
+      // get the summary. Default is false.
+      abbreviateAggressively: false;
+    }
+
     plugins: [
       'karma-jasmine',
       'karma-mocha-reporter'
