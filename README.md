@@ -37,12 +37,20 @@ module.exports = function(config) {
 
     mochaReporter: {
       // If true, passing suites will only have their titles printed,
-      // and individual specs will be skipped. Default is false.
+      // and individual specs will be skipped. 'exceptFirst' will show
+      // the full spec on the first run, but abbreviate afterwards.
+      // This is useful if you run your tasks in a watcher and want to
+      // have the nice overview mocha reporter offers, but without the
+      // verbosity.
+      //
+      // Default is false.
       abbreviatePassing: false;
 
       // If true and abbreviatePassing is set, passing suites will be
       // skipped completely. Thus for a fully green suite, you will only
-      // get the summary. Default is false.
+      // get the summary.
+      //
+      // Default is false.
       abbreviateAggressively: false;
     }
 

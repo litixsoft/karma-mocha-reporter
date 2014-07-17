@@ -16,9 +16,15 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
 
     var self = this;
     var firstRun = true;
+    var verboseFirstRun = false;
 
     if (config.mochaReporter === undefined) {
         config.mochaReporter = {};
+    }
+
+    if (config.mochaReporter.abbreviatePassing === 'exceptFirst') {
+        verboseFirstRun = true;
+        config.mochaReporter.abbreviatePassing = false;
     }
 
     // disable chalk when colors is set to false
@@ -322,6 +328,10 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
 
                 printFailures(self.allResults);
             }
+        }
+
+        if (verboseFirstRun) {
+            config.mochaReporter.abbreviatePassing = true;
         }
     };
 };
