@@ -16,7 +16,6 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
 
     var self = this;
     var firstRun = true;
-    var silent = false;
 
     if (config.mochaReporter === undefined) {
         config.mochaReporter = {};
