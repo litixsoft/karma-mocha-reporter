@@ -229,7 +229,9 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
             if(item.isRoot) {
                 failingSuite = !item.success;
             }
-            item.shouldPrint = !config.mochaReporter.abbreviatePassing || item.isRoot || failingSuite;
+            item.shouldPrint = !config.mochaReporter.abbreviatePassing ||
+                !config.mochaReporter.abbreviateAggressively && item.isRoot ||
+                failingSuite;
 
             // it block
             if (depth === maxDepth) {
