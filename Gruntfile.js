@@ -65,6 +65,27 @@ module.exports = function (grunt) {
                 detectBrowsers: {
                     enabled: false
                 }
+            },
+            autowatch: {
+                configFile: 'demo/karma.autowatch.conf.js',
+                options: {
+                    files: ['demo/aDemo.spec.js']
+                },
+                detectBrowsers: {
+                    enabled: false
+                }
+            },
+            minimal: {
+                configFile: 'demo/karma.autowatch.conf.js',
+                options: {
+                    files: ['demo/aDemo.spec.js'],
+                    mochaReporter: {
+                        output: 'minimal'
+                    }
+                },
+                detectBrowsers: {
+                    enabled: false
+                }
             }
         }
     });
@@ -78,6 +99,8 @@ module.exports = function (grunt) {
     grunt.registerTask('test', ['copy:demo', 'jshint', 'karma:success']);
     grunt.registerTask('demo', ['copy:demo', 'karma:singleBrowser', 'karma:demo', 'karma:success', 'karma:noColors', 'karma:fail']);
     grunt.registerTask('short', ['copy:demo', 'karma:short']);
+    grunt.registerTask('autowatch', ['copy:demo', 'karma:autowatch']);
+    grunt.registerTask('minimal', ['copy:demo', 'karma:minimal']);
     grunt.registerTask('single', ['copy:demo', 'karma:singleRun']);
     grunt.registerTask('fail', ['copy:demo', 'karma:fail']);
 

@@ -17,6 +17,10 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
     var self = this;
     var firstRun = true;
 
+    config.mochaReporter = config.mochaReporter || {};
+
+    var outputMode = config.mochaReporter.output || 'full';
+
     // disable chalk when colors is set to false
     if (config.colors === false) {
         chalk.enabled = false;
@@ -249,8 +253,10 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
                 }
 
                 if (item.count === self.numberOfBrowsers) {
-                    // print results to output when test is run through all browsers
-                    print(self.allResults, depth);
+                    // print results to output when test was ran through all browsers
+                    if (outputMode !== 'minimal') {
+                        print(self.allResults, depth);
+                    }
                 }
             } else {
                 item.items = item.items || {};
@@ -284,7 +290,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
     };
 
     self.onRunComplete = function (browsers, results) {
-        browsers.forEach(function(browser){
+        browsers.forEach(function (browser) {
             self.totalTime += browser.lastResult.totalTime;
         });
 
@@ -308,6 +314,10 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
 
                 printFailures(self.allResults);
             }
+        }
+
+        if (outputMode === 'autowatch') {
+            outputMode = 'minimal';
         }
     };
 };
