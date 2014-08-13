@@ -17,7 +17,10 @@
     "globals": {
         "describe": false,
         "expect": false,
+        "iit": false,
         "it": false,
+        "runs": false,
+        "waitsFor": false,
         "xit": false,
         "xdescribe": false
     }

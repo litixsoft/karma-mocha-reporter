@@ -1,4 +1,3 @@
-/*global describe, it, expect, xdescribe, xit */
 describe('Demo2 test suite', function () {
     describe('inner suite 1', function () {
         describe('inner suite 2', function () {

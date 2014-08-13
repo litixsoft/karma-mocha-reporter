@@ -1,4 +1,3 @@
-/*global describe, it, expect, xdescribe, runs, waitsFor */
 describe('A demo test suite', function () {
     var flag, value;
 
