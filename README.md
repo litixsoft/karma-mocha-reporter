@@ -16,7 +16,7 @@ The easiest way is to keep `karma-mocha-reporter` as a devDependency in your `pa
 {
   "devDependencies": {
     "karma": "^0.12",
-    "karma-mocha-reporter": "^0.2.0"
+    "karma-mocha-reporter": "^0.3.0"
   }
 }
 ```
@@ -43,6 +43,39 @@ module.exports = function(config) {
 };
 ```
 
+## Options
+### output
+**Type:** String
+
+**Possible Values:**
+  * `full` (default)
+  * `autowatch`
+  * `minimal`
+
+With option `full` all output is printed to the console. The option `autowatch` means that the first run will have the full output and the next runs just output the summary and errors in mocha style. With the option `minimal` only the summary and errors are printed to the console in mocha style.
+
+```js
+// karma.conf.js
+module.exports = function(config) {
+  config.set({
+    frameworks: ['jasmine'],
+
+    // reporters configuration
+    reporters: ['mocha'],
+
+    // reporter options
+    mochaReporter: {
+      output: 'autowatch'
+    },
+
+    plugins: [
+      'karma-jasmine',
+      'karma-mocha-reporter'
+    ]
+  });
+};
+```
+
 ## Contributing
 In lieu of a formal styleguide take care to maintain the existing coding style. Lint and test your code using [grunt](http://gruntjs.com/).
 
@@ -51,6 +84,9 @@ You can preview your changes by running:
     $ grunt demo --force
 
 ## Release History
+### v0.3.0
+* add option "output" to set the output level of the reporter
+
 ### v0.2.8
 * add module log-symbols for printing symbols to the console
 
