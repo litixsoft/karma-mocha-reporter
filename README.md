@@ -80,11 +80,11 @@ module.exports = function(config) {
 **Type:** Boolean
 
 **Possible Values:**
-  * false (default)
-  * true
+  * `false` (default)
+  * `true`
 
-  When setting the ignoreSkipped flag to true, the reporter will ignore the skipped tests in the output and you will see
-  only the tests that where really executed. The summary will still contain the number of skipped tests.
+When setting the ignoreSkipped flag to true, the reporter will ignore the skipped tests in the output and you will see
+only the tests that where really executed. The summary will still contain the number of skipped tests.
 
 
 ## Contributing
