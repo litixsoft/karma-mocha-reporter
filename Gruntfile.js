@@ -86,6 +86,15 @@ module.exports = function (grunt) {
                 detectBrowsers: {
                     enabled: false
                 }
+            },
+            ignoreSkipped: {
+                configFile: 'demo/karma.conf.js',
+                options: {
+                    files: ['demo/skipping.spec.js'],
+                    mochaReporter: {
+                        ignoreSkipped: true
+                    }
+                }
             }
         }
     });
@@ -103,6 +112,7 @@ module.exports = function (grunt) {
     grunt.registerTask('minimal', ['copy:demo', 'karma:minimal']);
     grunt.registerTask('single', ['copy:demo', 'karma:singleRun']);
     grunt.registerTask('fail', ['copy:demo', 'karma:fail']);
+    grunt.registerTask('ignoreSkipped', ['copy:demo', 'karma:ignoreSkipped']);
 
     // Default task.
     grunt.registerTask('default', ['test']);

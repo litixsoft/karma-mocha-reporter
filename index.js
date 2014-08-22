@@ -20,6 +20,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
     config.mochaReporter = config.mochaReporter || {};
 
     var outputMode = config.mochaReporter.output || 'full';
+    var ignoreSkipped = config.mochaReporter.ignoreSkipped || false;
 
     // disable chalk when colors is set to false
     if (config.colors === false) {
@@ -87,7 +88,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
             }
 
             // only print to output once
-            if (item.name && !item.printed) {
+            if (item.name && !item.printed && (!item.skipped || !ignoreSkipped)) {
                 // indent
                 var line = repeatString('  ', depth) + item.name;
 
