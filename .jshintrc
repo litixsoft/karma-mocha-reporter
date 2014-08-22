@@ -16,6 +16,7 @@
     "node": true,
     "globals": {
         "describe": false,
+        "ddescribe": false,
         "expect": false,
         "iit": false,
         "it": false,
