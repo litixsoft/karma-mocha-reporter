@@ -76,6 +76,17 @@ module.exports = function(config) {
 };
 ```
 
+### ignoreSkipped
+**Type:** Boolean
+
+**Possible Values:**
+  * `false` (default)
+  * `true`
+
+When setting the ignoreSkipped flag to true, the reporter will ignore the skipped tests in the output and you will see
+only the tests that where really executed. The summary will still contain the number of skipped tests.
+
+
 ## Contributing
 In lieu of a formal styleguide take care to maintain the existing coding style. Lint and test your code using [grunt](http://gruntjs.com/).
 
