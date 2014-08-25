@@ -95,6 +95,9 @@ You can preview your changes by running:
     $ grunt demo --force
 
 ## Release History
+### v0.3.1
+* add option "ignoreSkipped" to ignore the skipped test in the output
+
 ### v0.3.0
 * add option "output" to set the output level of the reporter
 
