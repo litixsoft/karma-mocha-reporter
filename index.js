@@ -211,7 +211,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
 
         path.reduce(function (suite, description, depth) {
             if (isReservedProperty(suite, description)) {
-                self.write(chalk.yellow('Reserved name for ' + (depth === maxDepth ? 'it' : 'describe') + ' block (' + description + ')! Please use an other name, othwerwhise the result are not printed correctly\n'));
+                self.write(chalk.yellow('Reserved name for ' + (depth === maxDepth ? 'it' : 'describe') + ' block (' + description + ')! Please use an other name, otherwise the result are not printed correctly\n'));
                 return {};
             }
 
