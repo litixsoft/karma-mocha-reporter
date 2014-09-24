@@ -55,6 +55,6 @@
     },
     "dependencies": {
         "chalk": "^0.5.1",
-        "log-symbols": "^1.0.0"
+        "log-symbols": "^1.0.1"
     }
 }
