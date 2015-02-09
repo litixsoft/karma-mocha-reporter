@@ -112,6 +112,7 @@ module.exports = function (grunt) {
     grunt.registerTask('minimal', ['copy:demo', 'karma:minimal']);
     grunt.registerTask('single', ['copy:demo', 'karma:singleRun']);
     grunt.registerTask('fail', ['copy:demo', 'karma:fail']);
+    grunt.registerTask('noColors', ['copy:demo', 'karma:noColors']);
     grunt.registerTask('ignoreSkipped', ['copy:demo', 'karma:ignoreSkipped']);
 
     // Default task.
