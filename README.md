@@ -95,6 +95,9 @@ You can preview your changes by running:
     $ grunt demo --force
 
 ## Release History
+### v0.3.2
+* strip color from symbols when colors is set to false
+
 ### v0.3.1
 * add option "ignoreSkipped" to ignore the skipped test in the output
 
@@ -137,7 +140,7 @@ You can preview your changes by running:
 [Litixsoft GmbH](http://www.litixsoft.de)
 
 ## License
-Copyright (C) 2013-2014 Litixsoft GmbH <info@litixsoft.de>
+Copyright (C) 2013-2015 Litixsoft GmbH <info@litixsoft.de>
 Licensed under the MIT license.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
