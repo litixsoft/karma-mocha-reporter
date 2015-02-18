@@ -48,19 +48,13 @@ module.exports = function(config) {
 **Type:** String
 
 **Possible Values:**
-  * `full` (default)
-  * `autowatch`
-  * `minimal`
-  * `noFailures`
 
-Option | Description
+Value | Description
 ------ | -----------
-`full` | all output is printed to the console
+`full` (default) | all output is printed to the console
 `autowatch` | first run will have the full output and the next runs just output the summary and errors in mocha style
 `minimal` | only the summary and errors are printed to the console in mocha style
 `noFailures` | the failure details are not logged
-
-With option `full` all output is printed to the console. The option `autowatch` means that the first run will have the full output and the next runs just output the summary and errors in mocha style. With the option `minimal` only the summary and errors are printed to the console in mocha style.
 
 ```js
 // karma.conf.js
