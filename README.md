@@ -97,6 +97,10 @@ You can preview your changes by running:
     $ grunt demo --force
 
 ## Release History
+### v1.0.0
+* add output option `noFailures` -  when set, the failure details are not logged
+* time to get final with 1.0.0 :-)
+
 ### v0.3.2
 * strip color from symbols when colors is set to false
 
