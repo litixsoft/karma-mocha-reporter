@@ -66,6 +66,18 @@ module.exports = function (grunt) {
                     enabled: false
                 }
             },
+            printNoFailures: {
+                configFile: 'demo/karma.conf.js',
+                mochaReporter: {
+                    output: 'noFailures'
+                },
+                options: {
+                    files: ['demo/fail.spec.js']
+                },
+                detectBrowsers: {
+                    enabled: false
+                }
+            },
             autowatch: {
                 configFile: 'demo/karma.autowatch.conf.js',
                 options: {
@@ -112,6 +124,7 @@ module.exports = function (grunt) {
     grunt.registerTask('minimal', ['copy:demo', 'karma:minimal']);
     grunt.registerTask('single', ['copy:demo', 'karma:singleRun']);
     grunt.registerTask('fail', ['copy:demo', 'karma:fail']);
+    grunt.registerTask('printNoFailures', ['copy:demo', 'karma:printNoFailures']);
     grunt.registerTask('noColors', ['copy:demo', 'karma:noColors']);
     grunt.registerTask('ignoreSkipped', ['copy:demo', 'karma:ignoreSkipped']);
 

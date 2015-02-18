@@ -28,7 +28,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
         chalk.enabled = false;
     }
 
-    function getLogSymbol(symbol) {
+    function getLogSymbol (symbol) {
         return chalk.enabled ? symbol : chalk.stripColor(symbol);
     }
 
@@ -316,9 +316,11 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
 
             if (results.failed) {
                 self.write(chalk.red(getLogSymbol(logSymbols.error) + ' ' + results.failed + ' tests failed\n'));
-                self.write(chalk.underline.bold('\nFAILED TESTS:') + '\n');
 
-                printFailures(self.allResults);
+                if (outputMode !== 'noFailures') {
+                    self.write(chalk.underline.bold('\nFAILED TESTS:') + '\n');
+                    printFailures(self.allResults);
+                }
             }
         }
 

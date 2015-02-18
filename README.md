@@ -51,6 +51,14 @@ module.exports = function(config) {
   * `full` (default)
   * `autowatch`
   * `minimal`
+  * `noFailures`
+
+Option | Description
+------ | -----------
+`full` | all output is printed to the console
+`autowatch` | first run will have the full output and the next runs just output the summary and errors in mocha style
+`minimal` | only the summary and errors are printed to the console in mocha style
+`noFailures` | the failure details are not logged
 
 With option `full` all output is printed to the console. The option `autowatch` means that the first run will have the full output and the next runs just output the summary and errors in mocha style. With the option `minimal` only the summary and errors are printed to the console in mocha style.
 
