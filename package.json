@@ -47,15 +47,15 @@
     },
     "devDependencies": {
         "grunt": "^0.4.5",
-        "grunt-contrib-copy": "^0.7.0",
+        "grunt-contrib-copy": "^0.8.0",
         "grunt-contrib-jshint": "^0.11.0",
         "grunt-karma": "^0.10.1",
         "jasmine-core": "2.2.0",
-        "karma-detect-browsers": "^1.1.0",
+        "karma-detect-browsers": "^1.1.2",
         "karma-jasmine": "^0.3.5"
     },
     "dependencies": {
-        "chalk": "^0.5.1",
-        "log-symbols": "^1.0.1"
+        "chalk": "^1.0.0",
+        "log-symbols": "^1.0.2"
     }
 }
