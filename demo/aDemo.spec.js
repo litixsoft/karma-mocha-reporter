@@ -11,48 +11,22 @@ describe('A demo test suite', function () {
         });
 
         describe('with an inner suite 2', function () {
-            it('1.3.0 should assert true the slow async', function () {
+            it('1.3.0 should assert true the slow async', function (done) {
                 expect(true).toBeTruthy();
 
-                runs(function () {
-                    flag = false;
-                    value = 0;
-
-                    setTimeout(function () {
-                        flag = true;
-                    }, 1500);
-                });
-
-                waitsFor(function() {
-                    value++;
-                    return flag;
-                }, 'The Value should be incremented', 2000);
-
-                runs(function() {
-                    expect(value).toBeGreaterThan(0);
-                });
+                setTimeout(function () {
+                    expect(true).toBeTruthy();
+                    done();
+                }, 1500);
             });
 
-            it('1.3.1 should assert true the slow async', function () {
+            it('1.3.1 should assert true the slow async', function (done) {
                 expect(true).toBeTruthy();
 
-                runs(function () {
-                    flag = false;
-                    value = 0;
-
-                    setTimeout(function () {
-                        flag = true;
-                    }, 1500);
-                });
-
-                waitsFor(function() {
-                    value++;
-                    return flag;
-                }, 'The Value should be incremented', 2000);
-
-                runs(function() {
-                    expect(value).toBeGreaterThan(0);
-                });
+                setTimeout(function () {
+                    expect(true).toBeTruthy();
+                    done();
+                }, 1500);
             });
 
             it('1.3.2 should fail', function () {
@@ -64,26 +38,13 @@ describe('A demo test suite', function () {
             expect(true).toBeTruthy();
         });
 
-        it('1.2.2 should assert true the slow async', function () {
+        it('1.2.2 should assert true the slow async', function (done) {
             expect(true).toBeTruthy();
 
-            runs(function () {
-                flag = false;
-                value = 0;
-
-                setTimeout(function () {
-                    flag = true;
-                }, 1500);
-            });
-
-            waitsFor(function() {
-                value++;
-                return flag;
-            }, 'The Value should be incremented', 2000);
-
-            runs(function() {
-                expect(value).toBeGreaterThan(0);
-            });
+            setTimeout(function () {
+                expect(true).toBeTruthy();
+                done();
+            }, 1500);
         });
     });
 
