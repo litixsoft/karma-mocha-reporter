@@ -161,7 +161,11 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
                     }
 
                     // add the error log in red
-                    line += chalk.red(formatError((item.log || [])[0], repeatString('  ', depth)));
+                    item.log = item.log || [];
+
+                    item.log.forEach(function (error) {
+                        line += chalk.red(formatError(error, repeatString('  ', depth)));
+                    });
                 }
 
                 // use write method of baseReporter

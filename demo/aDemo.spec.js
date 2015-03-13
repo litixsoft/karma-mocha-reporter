@@ -1,6 +1,4 @@
 describe('A demo test suite', function () {
-    var flag, value;
-
     it('1.1.0 should assert true', function () {
         expect(true).toBeTruthy();
     });

@@ -24,6 +24,9 @@ module.exports = function (grunt) {
             fast: {
                 configFile: 'demo/karma.conf.js',
                 browsers: ['PhantomJS'],
+                options: {
+                    files: ['demo/demo.spec.js']
+                },
                 detectBrowsers: {
                     enabled: false
                 }
