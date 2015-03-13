@@ -97,6 +97,9 @@ You can preview your changes by running:
     $ grunt demo --force
 
 ## Release History
+### v1.0.1
+* print out all errors in the summary when spec fails
+
 ### v1.0.0
 * add output option `noFailures` -  when set, the failure details are not logged
 * time to get final with 1.0.0 :-)
