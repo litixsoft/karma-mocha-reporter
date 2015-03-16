@@ -24,9 +24,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
     var ignoreSkipped = config.mochaReporter.ignoreSkipped || false;
 
     // disable chalk when colors is set to false
-    if (config.colors === false) {
-        chalk.enabled = false;
-    }
+    chalk.enabled = config.colors !== false;
 
     function getLogSymbol (symbol) {
         return chalk.enabled ? symbol : chalk.stripColor(symbol);
