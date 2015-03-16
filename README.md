@@ -97,6 +97,9 @@ You can preview your changes by running:
     $ grunt demo --force
 
 ## Release History
+### v1.0.2
+* enable colors when karma is piped
+
 ### v1.0.1
 * print out all errors in the summary when spec fails
 
