@@ -31,7 +31,7 @@
         "karma-reporter",
         "mocha"
     ],
-    "license": "The MIT License (MIT)",
+    "license": "MIT",
     "licenses": [
         {
             "type": "MIT",
