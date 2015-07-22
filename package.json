@@ -16,6 +16,7 @@
     ],
     "contributors": [
         "Artem Baguinski <abaguinski@gmail.com>",
+        "Brendan Nee <brendan@blinktag.com>",
         "Túbal Martín",
         "M-Koch"
     ],
@@ -45,15 +46,21 @@
     "devDependencies": {
         "grunt": "^0.4.5",
         "grunt-contrib-copy": "^0.8.0",
-        "grunt-contrib-jshint": "^0.11.0",
-        "grunt-karma": "^0.10.1",
+        "grunt-contrib-jshint": "^0.11.2",
+        "grunt-karma": "^0.12.0",
         "grunt-shell": "^1.1.2",
-        "jasmine-core": "2.2.0",
-        "karma-detect-browsers": "^1.1.2",
-        "karma-jasmine": "^0.3.5"
+        "jasmine-core": "2.3.4",
+        "karma-chrome-launcher": "*",
+        "karma-detect-browsers": "^2.0.1",
+        "karma-firefox-launcher": "*",
+        "karma-ie-launcher": "*",
+        "karma-jasmine": "^0.3.6",
+        "karma-opera-launcher": "*",
+        "karma-phantomjs-launcher": "*",
+        "karma-safari-launcher": "*"
     },
     "dependencies": {
-        "chalk": "^1.0.0",
+        "chalk": "1.1.0",
         "karma": ">=0.9",
         "log-symbols": "^1.0.2"
     }
