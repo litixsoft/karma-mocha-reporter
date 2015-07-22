@@ -44,8 +44,12 @@ module.exports = function (grunt) {
             },
             success: {
                 configFile: 'demo/karma.conf.js',
+                browsers: ['PhantomJS'],
                 options: {
                     files: ['demo/demo.spec.js']
+                },
+                detectBrowsers: {
+                    enabled: false
                 }
             },
             noColors: {
