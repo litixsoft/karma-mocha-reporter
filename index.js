@@ -78,7 +78,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
         var i, item;
 
         if (firstRun) {
-            self.write(chalk.underline.bold('\nStart:') + '\n');
+            self.write('\n' + chalk.underline.bold('Start:') + '\n');
             firstRun = false;
         }
 
@@ -302,7 +302,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
             self.totalTime += browser.lastResult.totalTime;
         });
 
-        self.write(chalk.green('\nFinished in ' + formatTimeInterval(self.totalTime) + ' / ' + formatTimeInterval(self.netTime) + '\n\n'));
+        self.write('\n' + chalk.green('Finished in ' + formatTimeInterval(self.totalTime) + ' / ' + formatTimeInterval(self.netTime) + '\n\n'));
 
         if (browsers.length > 0 && !results.disconnected) {
             self.write(chalk.underline.bold('SUMMARY:') + '\n');
@@ -320,7 +320,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
                 self.write(chalk.red(getLogSymbol(logSymbols.error) + ' ' + results.failed + ' tests failed\n'));
 
                 if (outputMode !== 'noFailures') {
-                    self.write(chalk.underline.bold('\nFAILED TESTS:') + '\n');
+                    self.write('\n' + chalk.underline.bold('FAILED TESTS:') + '\n');
                     printFailures(self.allResults);
                 }
             }
