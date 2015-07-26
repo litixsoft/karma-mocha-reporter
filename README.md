@@ -97,6 +97,9 @@ You can preview your changes by running:
     $ grunt demo --force
 
 ## Release History
+### v1.0.3
+* Changed some formatting to not start at newline
+
 ### v1.0.2
 * enable colors when karma is piped
 
