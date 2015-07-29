@@ -97,6 +97,9 @@ You can preview your changes by running:
     $ grunt demo --force
 
 ## Release History
+### v1.0.4
+* Added plural or singular noun for 'test' based on count
+
 ### v1.0.3
 * Changed some formatting to not start at newline
 
