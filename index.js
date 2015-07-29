@@ -195,6 +195,20 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
     }
 
     /**
+     * Returns a singularized or plularized noun for "test" based on test count
+     *
+     * @param {!Number} testCount
+     * @returns {String}
+     */
+
+    function getTestNounFor (testCount) {
+        if ( testCount === 1 ) {
+            return 'test';
+        }
+        return 'tests';
+    }
+
+    /**
      * Returns if the property is an reserverd object property
      *
      * @param {!Object} obj
@@ -306,18 +320,18 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
 
         if (browsers.length > 0 && !results.disconnected) {
             self.write(chalk.underline.bold('SUMMARY:') + '\n');
-            self.write(chalk.green(getLogSymbol(logSymbols.success) + ' ' + results.success + ' tests completed\n'));
+            self.write(chalk.green(getLogSymbol(logSymbols.success) + ' ' + results.success + ' ' + getTestNounFor(results.success) + ' completed\n'));
 
             if (self.numberOfSkippedTests > 0) {
-                self.write(chalk.grey(getLogSymbol(logSymbols.info) + ' ' + self.numberOfSkippedTests + ' tests skipped\n'));
+                self.write(chalk.grey(getLogSymbol(logSymbols.info) + ' ' + self.numberOfSkippedTests + ' ' + getTestNounFor(self.numberOfSkippedTests) + ' skipped\n'));
             }
 
             if (self.numberOfSlowTests > 0) {
-                self.write(chalk.yellow(getLogSymbol(logSymbols.warning) + ' ' + self.numberOfSlowTests + ' tests slow\n'));
+                self.write(chalk.yellow(getLogSymbol(logSymbols.warning) + ' ' + self.numberOfSlowTests + ' ' + getTestNounFor(self.numberOfSlowTests) + ' slow\n'));
             }
 
             if (results.failed) {
-                self.write(chalk.red(getLogSymbol(logSymbols.error) + ' ' + results.failed + ' tests failed\n'));
+                self.write(chalk.red(getLogSymbol(logSymbols.error) + ' ' + results.failed + ' ' + getTestNounFor(results.failed) + ' failed\n'));
 
                 if (outputMode !== 'noFailures') {
                     self.write('\n' + chalk.underline.bold('FAILED TESTS:') + '\n');
