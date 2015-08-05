@@ -15,8 +15,8 @@ The easiest way is to keep `karma-mocha-reporter` as a devDependency in your `pa
 ```json
 {
   "devDependencies": {
-    "karma": "^0.12",
-    "karma-mocha-reporter": "^0.3.0"
+    "karma": "^0.13",
+    "karma-mocha-reporter": "^1.1.0"
   }
 }
 ```

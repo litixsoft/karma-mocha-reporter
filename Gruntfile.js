@@ -162,7 +162,7 @@ module.exports = function (grunt) {
 
     // Register tasks.
     grunt.registerTask('test', ['copy:demo', 'jshint', 'karma:success']);
-    grunt.registerTask('demo', ['copy:demo', 'karma:singleBrowser', 'karma:demo', 'karma:success', 'karma:fail', 'karma:printNoFailures', 'shell:karma', 'karma:noColors']);
+    grunt.registerTask('demo', ['copy:demo', 'karma:singleBrowser', 'karma:demo', 'karma:success', 'karma:fail', 'karma:printNoFailures', 'shell:karma', 'karma:noColors', 'karma:colors']);
     grunt.registerTask('fast', ['copy:demo', 'karma:fast']);
     grunt.registerTask('short', ['copy:demo', 'karma:short']);
     grunt.registerTask('autowatch', ['copy:demo', 'karma:autowatch']);
