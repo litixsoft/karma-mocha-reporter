@@ -26,6 +26,14 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
     // disable chalk when colors is set to false
     chalk.enabled = config.colors !== false;
 
+    // set color functions
+    config.mochaReporter.colors = config.mochaReporter.colors || {};
+
+    var success = chalk[config.mochaReporter.colors.success] || chalk.green;
+    var info = chalk[config.mochaReporter.colors.info] || chalk.grey;
+    var warning = chalk[config.mochaReporter.colors.warning] || chalk.yellow;
+    var error = chalk[config.mochaReporter.colors.error] || chalk.red;
+
     function getLogSymbol (symbol) {
         return chalk.enabled ? symbol : chalk.stripColor(symbol);
     }
@@ -99,10 +107,10 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
                 if (item.type === 'it') {
                     if (item.skipped) {
                         // print skipped tests grey
-                        line = chalk.gray(line + ' (skipped)');
+                        line = info(line + ' (skipped)');
                     } else {
-                        // set color to green or red
-                        line = item.success ? chalk.green(line) : chalk.red(line);
+                        // set color to success or error
+                        line = item.success ? success(line) : error(line);
                     }
                 } else {
                     // print name of a suite block in bold
@@ -149,8 +157,8 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
 
                 // it block
                 if (item.type === 'it') {
-                    // make item name red
-                    line = chalk.red(line) + '\n';
+                    // make item name error
+                    line = error(line) + '\n';
 
                     // add all browser in which the test failed with color yellow
                     for (var bi = 0; bi < item.failed.length; bi++) {
@@ -161,8 +169,8 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
                     // add the error log in red
                     item.log = item.log || [];
 
-                    item.log.forEach(function (error) {
-                        line += chalk.red(formatError(error, repeatString('  ', depth)));
+                    item.log.forEach(function (err) {
+                        line += error(formatError(err, repeatString('  ', depth)));
                     });
                 }
 
@@ -202,7 +210,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
      */
 
     function getTestNounFor (testCount) {
-        if ( testCount === 1 ) {
+        if (testCount === 1) {
             return 'test';
         }
         return 'tests';
@@ -232,7 +240,8 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
 
         path.reduce(function (suite, description, depth) {
             if (isReservedProperty(suite, description)) {
-                self.write(chalk.yellow('Reserved name for ' + (depth === maxDepth ? 'it' : 'describe') + ' block (' + description + ')! Please use an other name, otherwise the result are not printed correctly\n'));
+                self.write(warning('Reserved name for ' + (depth === maxDepth ? 'it' : 'describe') + ' block (' + description + ')! Please use an other name, otherwise the result are not printed correctly'));
+                self.write('\n');
                 return {};
             }
 
@@ -270,7 +279,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
 
                 if (config.reportSlowerThan && result.time > config.reportSlowerThan) {
                     // add slow report warning
-                    item.name += chalk.yellow((' (slow: ' + formatTimeInterval(result.time) + ')'));
+                    item.name += warning((' (slow: ' + formatTimeInterval(result.time) + ')'));
                     self.numberOfSlowTests++;
                 }
 
@@ -316,22 +325,27 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
             self.totalTime += browser.lastResult.totalTime;
         });
 
-        self.write('\n' + chalk.green('Finished in ' + formatTimeInterval(self.totalTime) + ' / ' + formatTimeInterval(self.netTime) + '\n\n'));
+        self.write('\n' + success('Finished in ' + formatTimeInterval(self.totalTime) + ' / ' + formatTimeInterval(self.netTime)));
+        self.write('\n\n');
 
         if (browsers.length > 0 && !results.disconnected) {
             self.write(chalk.underline.bold('SUMMARY:') + '\n');
-            self.write(chalk.green(getLogSymbol(logSymbols.success) + ' ' + results.success + ' ' + getTestNounFor(results.success) + ' completed\n'));
+            self.write(success(getLogSymbol(logSymbols.success) + ' ' + results.success + ' ' + getTestNounFor(results.success) + ' completed'));
+            self.write('\n');
 
             if (self.numberOfSkippedTests > 0) {
-                self.write(chalk.grey(getLogSymbol(logSymbols.info) + ' ' + self.numberOfSkippedTests + ' ' + getTestNounFor(self.numberOfSkippedTests) + ' skipped\n'));
+                self.write(info(getLogSymbol(logSymbols.info) + ' ' + self.numberOfSkippedTests + ' ' + getTestNounFor(self.numberOfSkippedTests) + ' skipped'));
+                self.write('\n');
             }
 
             if (self.numberOfSlowTests > 0) {
-                self.write(chalk.yellow(getLogSymbol(logSymbols.warning) + ' ' + self.numberOfSlowTests + ' ' + getTestNounFor(self.numberOfSlowTests) + ' slow\n'));
+                self.write(warning(getLogSymbol(logSymbols.warning) + ' ' + self.numberOfSlowTests + ' ' + getTestNounFor(self.numberOfSlowTests) + ' slow'));
+                self.write('\n');
             }
 
             if (results.failed) {
-                self.write(chalk.red(getLogSymbol(logSymbols.error) + ' ' + results.failed + ' ' + getTestNounFor(results.failed) + ' failed\n'));
+                self.write(error(getLogSymbol(logSymbols.error) + ' ' + results.failed + ' ' + getTestNounFor(results.failed) + ' failed'));
+                self.write('\n');
 
                 if (outputMode !== 'noFailures') {
                     self.write('\n' + chalk.underline.bold('FAILED TESTS:') + '\n');

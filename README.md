@@ -44,6 +44,47 @@ module.exports = function(config) {
 ```
 
 ## Options
+### colors
+**Type:** Object
+
+Let's you overwrite the default colors. Possible values are all colors and background colors from [chalk](https://github.com/chalk/chalk#colors).
+
+**Possible Values:**
+
+Value | Description | Default
+------ | ----------- | -------
+`success` | success messages | green
+`info` | info messages | grey
+`warning` | warn messages | yellow
+`error` | error messages | red
+
+```js
+// karma.conf.js
+module.exports = function(config) {
+  config.set({
+    frameworks: ['jasmine'],
+
+    // reporters configuration
+    reporters: ['mocha'],
+
+    // reporter options
+    mochaReporter: {
+      colors: {
+        success: 'blue',
+        info: 'bgGreen',
+        warning: 'cyan',
+        error: 'bgRed'
+      }
+    },
+
+    plugins: [
+      'karma-jasmine',
+      'karma-mocha-reporter'
+    ]
+  });
+};
+```
+
 ### output
 **Type:** String
 

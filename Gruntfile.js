@@ -132,6 +132,24 @@ module.exports = function (grunt) {
                         ignoreSkipped: true
                     }
                 }
+            },
+            colors: {
+                configFile: 'demo/karma.conf.js',
+                browsers: ['PhantomJS'],
+                options: {
+                    files: ['demo/demo2.spec.js'],
+                    mochaReporter: {
+                        colors: {
+                            success: 'bgGreen',
+                            info: 'bgCyan',
+                            warning: 'bgYellow',
+                            error: 'wayne'
+                        }
+                    }
+                },
+                detectBrowsers: {
+                    enabled: false
+                }
             }
         }
     });
@@ -156,6 +174,7 @@ module.exports = function (grunt) {
     grunt.registerTask('noColors', ['copy:demo', 'karma:noColors']);
     grunt.registerTask('ignoreSkipped', ['copy:demo', 'karma:ignoreSkipped']);
     grunt.registerTask('piped', ['copy:demo', 'shell:karma']);
+    grunt.registerTask('colors', ['copy:demo', 'karma:colors']);
 
     // Default task.
     grunt.registerTask('default', ['test']);
