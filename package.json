@@ -1,7 +1,7 @@
 {
     "name": "karma-mocha-reporter",
     "description": "Karma reporter with mocha style logging.",
-    "version": "1.0.4",
+    "version": "1.1.0",
     "homepage": "http://www.litixsoft.de/modules-karmamochareporter",
     "author": "Litixsoft GmbH <info@litixsoft.de> (http://www.litixsoft.de)",
     "maintainers": [
@@ -58,7 +58,7 @@
         "karma-ie-launcher": "*",
         "karma-jasmine": "^0.3.6",
         "karma-opera-launcher": "*",
-        "karma-phantomjs-launcher": "*",
+        "karma-phantomjs-launcher": "0.2.0",
         "karma-safari-launcher": "*"
     },
     "dependencies": {

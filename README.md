@@ -138,6 +138,9 @@ You can preview your changes by running:
     $ grunt demo --force
 
 ## Release History
+### v1.1.0
+* Add option `colors` to config that allows to overwrite the default colors
+
 ### v1.0.4
 * Added plural or singular noun for 'test' based on count
 
