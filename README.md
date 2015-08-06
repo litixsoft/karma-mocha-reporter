@@ -138,6 +138,9 @@ You can preview your changes by running:
     $ grunt demo --force
 
 ## Release History
+### v1.1.1
+* Use overwritten colors also for the log symbols
+
 ### v1.1.0
 * Add option `colors` to config that allows to overwrite the default colors
 
