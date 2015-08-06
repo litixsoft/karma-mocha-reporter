@@ -1,7 +1,7 @@
 'use strict';
 
 var chalk = require('chalk');
-var logSymbols = require('log-symbols');
+var symbols = require('./symbols');
 
 /**
  * The MochaReporter.
@@ -29,13 +29,27 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
     // set color functions
     config.mochaReporter.colors = config.mochaReporter.colors || {};
 
-    var success = chalk[config.mochaReporter.colors.success] || chalk.green;
-    var info = chalk[config.mochaReporter.colors.info] || chalk.grey;
-    var warning = chalk[config.mochaReporter.colors.warning] || chalk.yellow;
-    var error = chalk[config.mochaReporter.colors.error] || chalk.red;
+    var colors = {
+        success: {
+            symbol: symbols.success,
+            print: chalk[config.mochaReporter.colors.success] || chalk.green
+        },
+        info: {
+            symbol: symbols.info,
+            print: chalk[config.mochaReporter.colors.info] || chalk.grey
+        },
+        warning: {
+            symbol: symbols.warning,
+            print: chalk[config.mochaReporter.colors.warning] || chalk.yellow
+        },
+        error: {
+            symbol: symbols.error,
+            print: chalk[config.mochaReporter.colors.error] || chalk.red
+        }
+    };
 
-    function getLogSymbol (symbol) {
-        return chalk.enabled ? symbol : chalk.stripColor(symbol);
+    function getLogSymbol (color) {
+        return chalk.enabled ? color.print(color.symbol) : chalk.stripColor(color.symbol);
     }
 
     /**
@@ -106,11 +120,11 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
                 // it block
                 if (item.type === 'it') {
                     if (item.skipped) {
-                        // print skipped tests grey
-                        line = info(line + ' (skipped)');
+                        // print skipped tests info
+                        line = colors.info.print(chalk.stripColor(line) + ' (skipped)');
                     } else {
                         // set color to success or error
-                        line = item.success ? success(line) : error(line);
+                        line = item.success ? colors.success.print(line) : colors.error.print(line);
                     }
                 } else {
                     // print name of a suite block in bold
@@ -158,19 +172,19 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
                 // it block
                 if (item.type === 'it') {
                     // make item name error
-                    line = error(line) + '\n';
+                    line = colors.error.print(line) + '\n';
 
-                    // add all browser in which the test failed with color yellow
+                    // add all browser in which the test failed with color warning
                     for (var bi = 0; bi < item.failed.length; bi++) {
                         var browserName = item.failed[bi];
-                        line += repeatString('  ', depth + 1) + chalk.italic.yellow(browserName) + '\n';
+                        line += repeatString('  ', depth + 1) + chalk.italic(colors.warning.print(browserName)) + '\n';
                     }
 
-                    // add the error log in red
+                    // add the error log in error color
                     item.log = item.log || [];
 
                     item.log.forEach(function (err) {
-                        line += error(formatError(err, repeatString('  ', depth)));
+                        line += colors.error.print(formatError(err, repeatString('  ', depth)));
                     });
                 }
 
@@ -240,7 +254,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
 
         path.reduce(function (suite, description, depth) {
             if (isReservedProperty(suite, description)) {
-                self.write(warning('Reserved name for ' + (depth === maxDepth ? 'it' : 'describe') + ' block (' + description + ')! Please use an other name, otherwise the result are not printed correctly'));
+                self.write(colors.warning.print('Reserved name for ' + (depth === maxDepth ? 'it' : 'describe') + ' block (' + description + ')! Please use an other name, otherwise the result are not printed correctly'));
                 self.write('\n');
                 return {};
             }
@@ -260,7 +274,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
                 item.count = item.count || 0;
                 item.count++;
                 item.failed = item.failed || [];
-                item.name = (result.success ? getLogSymbol(logSymbols.success) : getLogSymbol(logSymbols.error)) + ' ' + item.name;
+                item.name = (result.success ? getLogSymbol(colors.success) : getLogSymbol(colors.error)) + ' ' + item.name;
                 item.success = result.success;
                 item.skipped = result.skipped;
                 self.netTime += result.time;
@@ -279,7 +293,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
 
                 if (config.reportSlowerThan && result.time > config.reportSlowerThan) {
                     // add slow report warning
-                    item.name += warning((' (slow: ' + formatTimeInterval(result.time) + ')'));
+                    item.name += colors.warning.print((' (slow: ' + formatTimeInterval(result.time) + ')'));
                     self.numberOfSlowTests++;
                 }
 
@@ -325,26 +339,26 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
             self.totalTime += browser.lastResult.totalTime;
         });
 
-        self.write('\n' + success('Finished in ' + formatTimeInterval(self.totalTime) + ' / ' + formatTimeInterval(self.netTime)));
+        self.write('\n' + colors.success.print('Finished in ' + formatTimeInterval(self.totalTime) + ' / ' + formatTimeInterval(self.netTime)));
         self.write('\n\n');
 
         if (browsers.length > 0 && !results.disconnected) {
             self.write(chalk.underline.bold('SUMMARY:') + '\n');
-            self.write(success(getLogSymbol(logSymbols.success) + ' ' + results.success + ' ' + getTestNounFor(results.success) + ' completed'));
+            self.write(colors.success.print(getLogSymbol(colors.success) + ' ' + results.success + ' ' + getTestNounFor(results.success) + ' completed'));
             self.write('\n');
 
             if (self.numberOfSkippedTests > 0) {
-                self.write(info(getLogSymbol(logSymbols.info) + ' ' + self.numberOfSkippedTests + ' ' + getTestNounFor(self.numberOfSkippedTests) + ' skipped'));
+                self.write(colors.info.print(getLogSymbol(colors.info) + ' ' + self.numberOfSkippedTests + ' ' + getTestNounFor(self.numberOfSkippedTests) + ' skipped'));
                 self.write('\n');
             }
 
             if (self.numberOfSlowTests > 0) {
-                self.write(warning(getLogSymbol(logSymbols.warning) + ' ' + self.numberOfSlowTests + ' ' + getTestNounFor(self.numberOfSlowTests) + ' slow'));
+                self.write(colors.warning.print(getLogSymbol(colors.warning) + ' ' + self.numberOfSlowTests + ' ' + getTestNounFor(self.numberOfSlowTests) + ' slow'));
                 self.write('\n');
             }
 
             if (results.failed) {
-                self.write(error(getLogSymbol(logSymbols.error) + ' ' + results.failed + ' ' + getTestNounFor(results.failed) + ' failed'));
+                self.write(colors.error.print(getLogSymbol(colors.error) + ' ' + results.failed + ' ' + getTestNounFor(results.failed) + ' failed'));
                 self.write('\n');
 
                 if (outputMode !== 'noFailures') {

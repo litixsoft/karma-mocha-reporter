@@ -13,7 +13,7 @@ module.exports = function (grunt) {
         copy: {
             demo: {
                 expand: true,
-                src: ['index.js'],
+                src: ['index.js', 'symbols.js'],
                 dest: 'node_modules/karma-mocha-reporter'
             }
         },
@@ -142,8 +142,8 @@ module.exports = function (grunt) {
                         colors: {
                             success: 'bgGreen',
                             info: 'bgCyan',
-                            warning: 'bgYellow',
-                            error: 'wayne'
+                            warning: 'wayne',
+                            error: 'bgRed'
                         }
                     }
                 },
