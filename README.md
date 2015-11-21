@@ -119,6 +119,37 @@ module.exports = function(config) {
 };
 ```
 
+### divider
+**Type:** String
+
+**Default:** 80 equals signs ('=')
+
+The string to output between multiple test runs. Set to empty string to disable
+
+```js
+// karma.conf.js
+module.exports = function(config) {
+  config.set({
+    frameworks: ['jasmine'],
+
+    // reporters configuration
+    reporters: ['mocha'],
+
+    // reporter options
+    mochaReporter: {
+      divider: ''
+    },
+
+    plugins: [
+      'karma-jasmine',
+      'karma-mocha-reporter'
+    ]
+  });
+};
+```
+
+
+
 ### ignoreSkipped
 **Type:** Boolean
 

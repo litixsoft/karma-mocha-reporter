@@ -22,6 +22,10 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
 
     var outputMode = config.mochaReporter.output || 'full';
     var ignoreSkipped = config.mochaReporter.ignoreSkipped || false;
+    var divider = config.mochaReporter.divider;
+    if (divider !== '') {
+        divider = repeatString('=', process.stdout.columns || 80);
+    }
 
     // disable chalk when colors is set to false
     chalk.enabled = config.colors !== false;
@@ -98,11 +102,6 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
         var keys = Object.keys(suite);
         var length = keys.length;
         var i, item;
-
-        if (firstRun) {
-            self.write('\n' + chalk.underline.bold('Start:') + '\n');
-            firstRun = false;
-        }
 
         for (i = 0; i < length; i++) {
             item = suite[keys[i]];
@@ -320,6 +319,11 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
     };
 
     self.onRunStart = function (browsers) {
+        if (!firstRun && divider) {
+            self.write('\n' + chalk.bold(divider) + '\n');
+        }
+        firstRun = false;
+        self.write('\n' + chalk.underline.bold('START:') + '\n');
         self._browsers = [];
         self.allResults = {};
         self.totalTime = 0;
