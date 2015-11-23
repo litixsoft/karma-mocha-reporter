@@ -18,6 +18,24 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
     var self = this;
     var firstRun = true;
 
+    /**
+     * Returns the text repeated n times.
+     *
+     * @param {!string} text The text.
+     * @param {!number} n The number of times the string should be repeated.
+     * @returns {string}
+     */
+    function repeatString (text, n) {
+        var res = [];
+        var i;
+
+        for (i = 0; i < n; i++) {
+            res.push(text);
+        }
+
+        return res.join('');
+    }
+
     config.mochaReporter = config.mochaReporter || {};
 
     var outputMode = config.mochaReporter.output || 'full';
@@ -72,24 +90,6 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
         }
 
         return str;
-    }
-
-    /**
-     * Returns the text repeated n times.
-     *
-     * @param {!string} text The text.
-     * @param {!number} n The number of times the string should be repeated.
-     * @returns {string}
-     */
-    function repeatString (text, n) {
-        var res = [];
-        var i;
-
-        for (i = 0; i < n; i++) {
-            res.push(text);
-        }
-
-        return res.join('');
     }
 
     /**

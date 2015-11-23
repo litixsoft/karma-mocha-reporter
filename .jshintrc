@@ -17,9 +17,9 @@
     "node": true,
     "globals": {
         "describe": false,
-        "ddescribe": false,
+        "fdescribe": false,
         "expect": false,
-        "iit": false,
+        "fit": false,
         "it": false,
         "runs": false,
         "waitsFor": false,

@@ -1,9 +1,9 @@
 describe('Some suite', function () {
-    iit('Enabled test', function () {
+    fit('Enabled test', function () {
         expect(true).toBeTruthy();
     });
 
-    ddescribe('Enabled suite', function () {
+    fdescribe('Enabled suite', function () {
         it('should be skipped', function () {
             expect(true).toBeTruthy();
         });
