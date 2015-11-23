@@ -148,8 +148,6 @@ module.exports = function(config) {
 };
 ```
 
-
-
 ### ignoreSkipped
 **Type:** Boolean
 
@@ -169,6 +167,9 @@ You can preview your changes by running:
     $ grunt demo --force
 
 ## Release History
+### v1.1.2
+* Show a divider line between multiple test runs for clarity
+
 ### v1.1.1
 * Use overwritten colors also for the log symbols
 
