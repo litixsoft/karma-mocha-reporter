@@ -167,6 +167,9 @@ You can preview your changes by running:
     $ grunt demo --force
 
 ## Release History
+### v1.1.3
+* Fix for divider is always "=" even the user set divider in config
+
 ### v1.1.2
 * Show a divider line between multiple test runs for clarity
 
