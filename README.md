@@ -167,6 +167,9 @@ You can preview your changes by running:
     $ grunt demo --force
 
 ## Release History
+### v1.1.4
+* Print specs correctly when names of it blocks are identical within the same describe block
+
 ### v1.1.3
 * Fix for divider is always "=" even the user set divider in config
 
