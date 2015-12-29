@@ -256,7 +256,15 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
                 return {};
             }
 
-            var item = suite[description] || {};
+            var item;
+
+            if (suite.hasOwnProperty(description) && suite[description].type === 'it') {
+                item = {};
+                description += ' ';
+            } else {
+                item = suite[description] || {};
+            }
+
             suite[description] = item;
 
             item.name = description;
