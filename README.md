@@ -167,6 +167,9 @@ You can preview your changes by running:
     $ grunt demo --force
 
 ## Release History
+### v1.1.5
+* Show error message when the karma runner ends with an error
+
 ### v1.1.4
 * Print specs correctly when names of it blocks are identical within the same describe block
 
