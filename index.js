@@ -17,6 +17,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
 
     var self = this;
     var firstRun = true;
+    var isRunCompleted = false;
 
     /**
      * Returns the text repeated n times.
@@ -329,6 +330,8 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
             self.write('\n' + chalk.bold(divider) + '\n');
         }
         firstRun = false;
+        isRunCompleted = false;
+
         self.write('\n' + chalk.underline.bold('START:') + '\n');
         self._browsers = [];
         self.allResults = {};
@@ -348,6 +351,16 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
         browsers.forEach(function (browser) {
             self.totalTime += browser.lastResult.totalTime;
         });
+
+        // print extra error message for some special cases, e.g. when having the error "Some of your tests did a full page reload!" the onRunComplete() method is called twice
+        if (results.error && isRunCompleted) {
+            self.write('\n');
+            self.write(getLogSymbol(colors.error) + colors.error.print(' Error while running the tests! Exit code: ' + results.exitCode));
+            self.write('\n\n');
+            return;
+        }
+
+        isRunCompleted = true;
 
         self.write('\n' + colors.success.print('Finished in ' + formatTimeInterval(self.totalTime) + ' / ' + formatTimeInterval(self.netTime)));
         self.write('\n\n');

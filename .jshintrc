@@ -24,6 +24,7 @@
         "runs": false,
         "waitsFor": false,
         "xit": false,
-        "xdescribe": false
+        "xdescribe": false,
+        "window": false
     }
 }

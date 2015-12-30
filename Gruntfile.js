@@ -62,6 +62,16 @@ module.exports = function (grunt) {
                     enabled: false
                 }
             },
+            reload: {
+                configFile: 'demo/karma.conf.js',
+                browsers: ['PhantomJS'],
+                options: {
+                    files: ['demo/fullPageReload.spec.js']
+                },
+                detectBrowsers: {
+                    enabled: false
+                }
+            },
             noColors: {
                 configFile: 'demo/karma.conf.js',
                 colors: false,
@@ -172,7 +182,6 @@ module.exports = function (grunt) {
 
     // Register tasks.
     grunt.registerTask('test', ['copy:demo', 'jshint', 'karma:success']);
-    grunt.registerTask('demo', ['copy:demo', 'karma:singleBrowser', 'karma:demo', 'karma:success', 'karma:fail', 'karma:printNoFailures', 'shell:karma', 'karma:noColors', 'karma:colors', 'karma:duplicate']);
     grunt.registerTask('fast', ['copy:demo', 'karma:fast']);
     grunt.registerTask('short', ['copy:demo', 'karma:short']);
     grunt.registerTask('autowatch', ['copy:demo', 'karma:autowatch']);
@@ -186,6 +195,20 @@ module.exports = function (grunt) {
     grunt.registerTask('piped', ['copy:demo', 'shell:karma']);
     grunt.registerTask('colors', ['copy:demo', 'karma:colors']);
     grunt.registerTask('duplicate', ['copy:demo', 'karma:duplicate']);
+    grunt.registerTask('reload', ['copy:demo', 'karma:reload']);
+    grunt.registerTask('demo', [
+        'copy:demo',
+        'karma:singleBrowser',
+        'karma:demo',
+        'karma:success',
+        'karma:fail',
+        'karma:printNoFailures',
+        'shell:karma',
+        'karma:noColors',
+        'karma:colors',
+        'karma:duplicate',
+        'karma:reload'
+    ]);
 
     // Default task.
     grunt.registerTask('default', ['test']);
