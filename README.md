@@ -16,7 +16,7 @@ The easiest way is to keep `karma-mocha-reporter` as a devDependency in your `pa
 {
   "devDependencies": {
     "karma": "^0.13",
-    "karma-mocha-reporter": "^1.1.0"
+    "karma-mocha-reporter": "^1.1.6"
   }
 }
 ```
@@ -167,6 +167,10 @@ You can preview your changes by running:
     $ grunt demo --force
 
 ## Release History
+### v1.1.6
+* Fix error that reporter output was truncated when running multiple browsers
+* Reverts part of the fix from v1.1.4 (identical it blocks within the same describe block are only printed correctly when the test are run in one browser)
+
 ### v1.1.5
 * Show error message when the karma runner ends with an error
 
