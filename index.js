@@ -259,7 +259,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
 
             var item;
 
-            if (suite.hasOwnProperty(description) && suite[description].type === 'it') {
+            if (suite.hasOwnProperty(description) && suite[description].type === 'it' && self.numberOfBrowsers === 1) {
                 item = {};
                 description += ' ';
             } else {
@@ -283,6 +283,8 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
                 item.name = (result.success ? getLogSymbol(colors.success) : getLogSymbol(colors.error)) + ' ' + item.name;
                 item.success = result.success;
                 item.skipped = result.skipped;
+                item.visited = item.visited || [];
+                item.visited.push(browser.name);
                 self.netTime += result.time;
 
                 if (result.skipped) {
