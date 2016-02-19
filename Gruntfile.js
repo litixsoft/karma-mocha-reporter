@@ -26,6 +26,9 @@ module.exports = function (grunt) {
             demo: {
                 configFile: 'demo/karma.conf.js'
             },
+            mocha: {
+                configFile: 'demo/karma.mocha.conf.js'
+            },
             fast: {
                 configFile: 'demo/karma.conf.js',
                 browsers: ['PhantomJS'],
@@ -196,6 +199,7 @@ module.exports = function (grunt) {
     grunt.registerTask('colors', ['copy:demo', 'karma:colors']);
     grunt.registerTask('duplicate', ['copy:demo', 'karma:duplicate']);
     grunt.registerTask('reload', ['copy:demo', 'karma:reload']);
+    grunt.registerTask('mocha', ['copy:demo', 'karma:mocha']);
     grunt.registerTask('demo', [
         'copy:demo',
         'karma:singleBrowser',
@@ -207,6 +211,7 @@ module.exports = function (grunt) {
         'karma:noColors',
         'karma:colors',
         'karma:duplicate',
+        'karma:mocha',
         'karma:reload'
     ]);
 

@@ -50,6 +50,9 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
     // set color functions
     config.mochaReporter.colors = config.mochaReporter.colors || {};
 
+    // set diff output
+    config.mochaReporter.showDiff = config.mochaReporter.showDiff || false;
+
     var colors = {
         success: {
             symbol: symbols.success,
@@ -69,8 +72,122 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
         }
     };
 
+    // check if mocha is installed when showDiff is enabled
+    if (config.mochaReporter.showDiff) {
+        try {
+            var mocha = require('mocha');
+            var diff = require('diff');
+        } catch (e) {
+            self.write(colors.error.print('Error loading module mocha!\nYou have enabled diff output. That only works with karma-mocha and mocha installed!\nRun the following command in your command line:\n  npm install karma-mocha mocha\n'));
+            return;
+        }
+    }
+
     function getLogSymbol (color) {
         return chalk.enabled ? color.print(color.symbol) : chalk.stripColor(color.symbol);
+    }
+
+    /**
+     * Returns a unified diff between two strings.
+     *
+     * @param {Error} err with actual/expected
+     * @return {string} The diff.
+     */
+    function unifiedDiff (err) {
+        var indent = '      ';
+
+        function cleanUp (line) {
+            if (line[0] === '+') {
+                return indent + colors.success.print(line);
+            }
+            if (line[0] === '-') {
+                return indent + colors.error.print(line);
+            }
+            if (line.match(/\@\@/)) {
+                return null;
+            }
+            if (line.match(/\\ No newline/)) {
+                return null;
+            }
+            return indent + line;
+        }
+
+        function notBlank (line) {
+            return line !== null;
+        }
+
+        var msg = diff.createPatch('string', err.actual, err.expected);
+        var lines = msg.split('\n').splice(4);
+        return '\n      ' +
+            colors.success.print('+ expected') + ' ' +
+            colors.error.print('- actual') +
+            '\n\n' +
+            lines.map(cleanUp).filter(notBlank).join('\n');
+    }
+
+    /**
+     * Return a character diff for `err`.
+     *
+     * @param {Error} err
+     * @param {string} type
+     * @return {string}
+     */
+    function errorDiff (err, type) {
+        var actual = err.actual;
+        var expected = err.expected;
+        return diff['diff' + type](actual, expected).map(function (str) {
+            if (str.added) {
+                return colors.success.print(str.value);
+            }
+            if (str.removed) {
+                return colors.error.print(str.value);
+            }
+            return str.value;
+        }).join('');
+    }
+
+    /**
+     * Pad the given `str` to `len`.
+     *
+     * @param {string} str
+     * @param {string} len
+     * @return {string}
+     */
+    function pad (str, len) {
+        str = String(str);
+        return Array(len - str.length + 1).join(' ') + str;
+    }
+
+    /**
+     * Returns an inline diff between 2 strings with coloured ANSI output
+     *
+     * @param {Error} err with actual/expected
+     * @return {string} Diff
+     */
+    function inlineDiff (err) {
+        var msg = errorDiff(err, 'WordsWithSpace');
+
+        // linenos
+        var lines = msg.split('\n');
+        if (lines.length > 4) {
+            var width = String(lines.length).length;
+            msg = lines.map(function (str, i) {
+                return pad(++i, width) + ' |' + ' ' + str;
+            }).join('\n');
+        }
+
+        // legend
+        msg = '\n' +
+            colors.success.print('expected') +
+            ' ' +
+            colors.error.print('actual') +
+            '\n\n' +
+            msg +
+            '\n';
+
+        // indent
+        msg = msg.replace(/^/gm, '      ');
+        return msg;
     }
 
     /**
@@ -181,9 +298,42 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
                     // add the error log in error color
                     item.log = item.log || [];
 
-                    item.log.forEach(function (err) {
-                        line += colors.error.print(formatError(err, repeatString('  ', depth)));
-                    });
+                    // print diff
+                    if (config.mochaReporter.showDiff && item.assertionErrors) {
+                        var log = item.log[0].split('\n');
+                        var errorMessage = log.splice(0, 1)[0];
+
+                        // print error message before diff
+                        line += colors.error.print(repeatString('  ', depth) + errorMessage + '\n');
+
+                        var expected = item.assertionErrors[0].expected;
+                        var actual = item.assertionErrors[0].actual;
+                        var utils = mocha.utils;
+                        var err = {
+                            actual: actual,
+                            expected: expected
+                        };
+
+                        // ensure that actual and expected are strings
+                        if (!(utils.isString(actual) && utils.isString(expected))) {
+                            err.actual = utils.stringify(actual);
+                            err.expected = utils.stringify(expected);
+                        }
+
+                        // create diff
+                        var diff = config.mochaReporter.showDiff === 'inline' ? inlineDiff(err) : unifiedDiff(err);
+
+                        line += diff + '\n';
+
+                        // print formatted stack trace after diff
+                        log.forEach(function (err) {
+                            line += colors.error.print(formatError(err));
+                        });
+                    } else {
+                        item.log.forEach(function (err) {
+                            line += colors.error.print(formatError(err, repeatString('  ', depth)));
+                        });
+                    }
                 }
 
                 // use write method of baseReporter
@@ -220,7 +370,6 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
      * @param {!Number} testCount
      * @returns {String}
      */
-
     function getTestNounFor (testCount) {
         if (testCount === 1) {
             return 'test';
@@ -297,6 +446,9 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
 
                     // add error log
                     item.log = result.log;
+
+                    // add assertion errors if available (currently in karma-mocha)
+                    item.assertionErrors = result.assertionErrors;
                 }
 
                 if (config.reportSlowerThan && result.time > config.reportSlowerThan) {

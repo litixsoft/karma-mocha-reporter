@@ -119,6 +119,46 @@ module.exports = function(config) {
 };
 ```
 
+### showDiff
+**Type:** String | Boolean
+
+Shows a diff output. Is disabled by default. All credits to the contributors of [mocha](https://github.com/mochajs/mocha), since the diff logic is used from there and customized for this module.
+
+![screenshot](demo/diff.png)
+
+Currently only works with karma-mocha >= v0.2.2 Not supported for karma-jasmine since the additional properties needed to render the diff are not supported in jasmine yet.
+
+**Possible Values:**
+
+Value | Description
+------ | -----------
+`true` | prints each diff in its own line, same as `'unified'`
+`'unified'` | prints each diff in its own line
+`'inline'` | prints diffs inline
+
+```js
+// karma.conf.js
+module.exports = function(config) {
+  config.set({
+    frameworks: ['mocha', 'chai'],
+
+    // reporters configuration
+    reporters: ['mocha'],
+
+    // reporter options
+    mochaReporter: {
+      showDiff: true
+    },
+
+    plugins: [
+      'karma-chai',
+      'karma-mocha',
+      'karma-mocha-reporter'
+    ]
+  });
+};
+```
+
 ### divider
 **Type:** String
 
@@ -164,7 +204,7 @@ In lieu of a formal styleguide take care to maintain the existing coding style. 
 
 You can preview your changes by running:
 
-    $ grunt demo --force
+    $ npm run demo
 
 ## Release History
 ### v1.1.6
