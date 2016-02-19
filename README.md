@@ -207,6 +207,9 @@ You can preview your changes by running:
     $ npm run demo
 
 ## Release History
+### v1.2.0
+* Add support for diff output for failed tests
+
 ### v1.1.6
 * Fix error that reporter output was truncated when running multiple browsers
 * Reverts part of the fix from v1.1.4 (identical it blocks within the same describe block are only printed correctly when the test are run in one browser)
