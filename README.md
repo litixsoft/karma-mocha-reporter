@@ -207,6 +207,9 @@ You can preview your changes by running:
     $ npm run demo
 
 ## Release History
+### v1.2.1
+* Check if property `assertionErrors` has at least one item before calculating the diff output
+
 ### v1.2.0
 * Add support for diff output for failed tests
 
