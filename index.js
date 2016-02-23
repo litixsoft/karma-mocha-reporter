@@ -299,7 +299,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
                     item.log = item.log || [];
 
                     // print diff
-                    if (config.mochaReporter.showDiff && item.assertionErrors) {
+                    if (config.mochaReporter.showDiff && item.assertionErrors && item.assertionErrors[0]) {
                         var log = item.log[0].split('\n');
                         var errorMessage = log.splice(0, 1)[0];
 
