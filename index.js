@@ -78,7 +78,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
             var mocha = require('mocha');
             var diff = require('diff');
         } catch (e) {
-            self.write(colors.error.print('Error loading module mocha!\nYou have enabled diff output. That only works with karma-mocha and mocha installed!\nRun the following command in your command line:\n  npm install karma-mocha mocha\n'));
+            self.write(colors.error.print('Error loading module mocha!\nYou have enabled diff output. That only works with karma-mocha and mocha installed!\nRun the following command in your command line:\n  npm install karma-mocha mocha diff\n'));
             return;
         }
     }
