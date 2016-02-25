@@ -207,6 +207,9 @@ You can preview your changes by running:
     $ npm run demo
 
 ## Release History
+### v1.2.2
+* Update error message when diff output is enabled and the required modules are missing
+
 ### v1.2.1
 * Check if property `assertionErrors` has at least one item before calculating the diff output
 
