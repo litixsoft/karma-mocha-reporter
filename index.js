@@ -423,6 +423,11 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
             item.skipped = result.skipped;
             item.success = (item.success === undefined ? true : item.success) && result.success;
 
+            // set item success to true when item is skipped
+            if (item.skipped) {
+                item.success = true;
+            }
+
             // it block
             if (depth === maxDepth) {
                 item.type = 'it';

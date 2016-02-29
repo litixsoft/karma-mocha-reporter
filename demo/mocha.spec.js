@@ -44,4 +44,22 @@ describe('A mocha test suite', function () {
         };
         expect(actual).to.deep.equal(expected);
     });
+
+    describe('Test Suite 1 (with a skipped test)', function () {
+        // case 1
+        xit('should fail', function () {
+            assert.isTrue(false);
+        });
+
+        // case 2
+        it('should pass', function () {
+            assert.isTrue(true);
+        });
+    });
+
+    describe('Test Suite 2', function () {
+        it('should fail', function () {
+            assert.isTrue(false);
+        });
+    });
 });
