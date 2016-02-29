@@ -207,6 +207,9 @@ You can preview your changes by running:
     $ npm run demo
 
 ## Release History
+### v1.2.3
+* Set property success to `true` when a test is skipped. Prevents wrong output in the failure summary
+
 ### v1.2.2
 * Update error message when diff output is enabled and the required modules are missing
 
