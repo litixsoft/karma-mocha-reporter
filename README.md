@@ -207,6 +207,9 @@ You can preview your changes by running:
     $ npm run demo
 
 ## Release History
+### v1.3.0
+* Wait before printing output of a test after all browser have run the test
+
 ### v1.2.3
 * Set property success to `true` when a test is skipped. Prevents wrong output in the failure summary
 
