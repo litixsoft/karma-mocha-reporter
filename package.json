@@ -69,7 +69,7 @@
         "karma-phantomjs-launcher": "1.0.0",
         "karma-safari-launcher": "*",
         "mocha": "^2.4.5",
-        "phantomjs-prebuilt": "^2.1.4"
+        "phantomjs-prebuilt": "^2.1.5"
     },
     "dependencies": {
         "chalk": "1.1.1"
