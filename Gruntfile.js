@@ -39,6 +39,12 @@ module.exports = function (grunt) {
                     enabled: false
                 }
             },
+            allBrowsers: {
+                configFile: 'demo/karma.conf.js',
+                options: {
+                    files: ['demo/demo.spec.js']
+                }
+            },
             singleBrowser: {
                 configFile: 'demo/karma.conf.js',
                 detectBrowsers: {
@@ -47,7 +53,7 @@ module.exports = function (grunt) {
             },
             success: {
                 configFile: 'demo/karma.conf.js',
-                browsers: ['PhantomJS'],
+                browsers: ['PhantomJS', 'Chrome', 'Firefox'],
                 options: {
                     files: ['demo/demo.spec.js']
                 },
@@ -200,6 +206,7 @@ module.exports = function (grunt) {
     grunt.registerTask('duplicate', ['copy:demo', 'karma:duplicate']);
     grunt.registerTask('reload', ['copy:demo', 'karma:reload']);
     grunt.registerTask('mocha', ['copy:demo', 'karma:mocha']);
+    grunt.registerTask('all', ['copy:demo', 'karma:allBrowsers']);
     grunt.registerTask('demo', [
         'copy:demo',
         'karma:singleBrowser',

@@ -484,7 +484,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
         specComplete(browser, result);
     };
 
-    self.onRunStart = function (browsers) {
+    self.onRunStart = function () {
         if (!firstRun && divider) {
             self.write('\n' + chalk.bold(divider) + '\n');
         }
@@ -498,12 +498,11 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
         self.netTime = 0;
         self.numberOfSlowTests = 0;
         self.numberOfSkippedTests = 0;
-        self.numberOfBrowsers = (browsers || []).length;
+        self.numberOfBrowsers = (config.browsers || []).length;
     };
 
     self.onBrowserStart = function (browser) {
         self._browsers.push(browser);
-        self.numberOfBrowsers = self._browsers.length;
     };
 
     self.onRunComplete = function (browsers, results) {
