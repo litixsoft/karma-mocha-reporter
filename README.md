@@ -207,6 +207,9 @@ You can preview your changes by running:
     $ npm run demo
 
 ## Release History
+### v2.0.1
+* Print correct failure summary and colors when a test fails only in one browser
+
 ### v2.0.0
 * Move module karma to peerDependencies
 
