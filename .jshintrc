@@ -22,6 +22,7 @@
         "expect": false,
         "fit": false,
         "it": false,
+        "navigator": false,
         "runs": false,
         "waitsFor": false,
         "xit": false,

@@ -209,6 +209,30 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
     }
 
     /**
+     * Checks if all items are completed
+     *
+     * @param {object} items The item objects
+     * @returns {boolean}
+     */
+    function allChildItemsAreCompleted (items) {
+        var item;
+        var isCompleted = true;
+
+        Object.keys(items).forEach(function(key){
+            item = items[key];
+
+            if (item.type === 'it') {
+                isCompleted = isCompleted && item.isCompleted;
+            } else if (item.items) {
+                // recursive check of child items
+                isCompleted = isCompleted && allChildItemsAreCompleted(item.items);
+            }
+        });
+        
+        return isCompleted;
+    }
+
+    /**
      * Writes the test results to the output
      *
      * @param {!object} suite The test suite
@@ -229,6 +253,11 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
 
             // only print to output once
             if (item.name && !item.printed && (!item.skipped || !ignoreSkipped)) {
+                // only print it block when it was ran through all browsers
+                if (item.type === 'it' && !item.isCompleted) {
+                    return;
+                }
+
                 // indent
                 var line = repeatString('  ', depth) + item.name;
 
@@ -254,8 +283,12 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
             }
 
             if (item.items) {
-                // print all child items
-                print(item.items, depth + 1);
+                var allChildItemsCompleted = allChildItemsAreCompleted(item.items);
+
+                if (allChildItemsCompleted) {
+                    // print all child items
+                    print(item.items, depth + 1);
+                }
             }
         }
     }
@@ -434,8 +467,8 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
                 item.count = item.count || 0;
                 item.count++;
                 item.failed = item.failed || [];
-                item.name = (result.success ? getLogSymbol(colors.success) : getLogSymbol(colors.error)) + ' ' + item.name;
-                item.success = result.success;
+                item.success = result.success && item.success;
+                item.name = (item.success ? getLogSymbol(colors.success) : getLogSymbol(colors.error)) + ' ' + item.name;
                 item.skipped = result.skipped;
                 item.visited = item.visited || [];
                 item.visited.push(browser.name);
@@ -463,6 +496,8 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
                 }
 
                 if (item.count === self.numberOfBrowsers) {
+                    item.isCompleted = true;
+                    
                     // print results to output when test was ran through all browsers
                     if (outputMode !== 'minimal') {
                         print(self.allResults, depth);

@@ -39,6 +39,16 @@ module.exports = function (grunt) {
                     enabled: false
                 }
             },
+            failInOneBrowser: {
+                configFile: 'demo/karma.conf.js',
+                browsers: ['PhantomJS', 'Chrome'],
+                options: {
+                    files: ['demo/failInOneBrowser.spec.js']
+                },
+                detectBrowsers: {
+                    enabled: false
+                }
+            },
             allBrowsers: {
                 configFile: 'demo/karma.conf.js',
                 options: {
@@ -198,6 +208,7 @@ module.exports = function (grunt) {
     grunt.registerTask('single', ['copy:demo', 'karma:singleRun']);
     grunt.registerTask('fail', ['copy:demo', 'karma:fail']);
     grunt.registerTask('fail2', ['copy:demo', 'karma:failWithAllBrowsers']);
+    grunt.registerTask('fail3', ['copy:demo', 'karma:failInOneBrowser']);
     grunt.registerTask('printNoFailures', ['copy:demo', 'karma:printNoFailures']);
     grunt.registerTask('noColors', ['copy:demo', 'karma:noColors']);
     grunt.registerTask('ignoreSkipped', ['copy:demo', 'karma:ignoreSkipped']);
@@ -213,6 +224,7 @@ module.exports = function (grunt) {
         'karma:demo',
         'karma:success',
         'karma:fail',
+        'karma:failInOneBrowser',
         'karma:printNoFailures',
         'shell:karma',
         'karma:noColors',
