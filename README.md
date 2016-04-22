@@ -16,7 +16,7 @@ The easiest way is to keep `karma-mocha-reporter` as a devDependency in your `pa
 {
   "devDependencies": {
     "karma": "^0.13",
-    "karma-mocha-reporter": "^1.1.6"
+    "karma-mocha-reporter": "^2.0.0"
   }
 }
 ```
@@ -207,6 +207,9 @@ You can preview your changes by running:
     $ npm run demo
 
 ## Release History
+### v2.0.2
+* Print a test suite with it's child items only after all child items are completed
+
 ### v2.0.1
 * Print correct failure summary and colors when a test fails only in one browser
 
