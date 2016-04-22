@@ -29,6 +29,17 @@ module.exports = function (grunt) {
             mocha: {
                 configFile: 'demo/karma.mocha.conf.js'
             },
+            concurrency: {
+                configFile: 'demo/karma.conf.js',
+                browsers: ['Chrome', 'PhantomJS'],
+                concurrency: 1,
+                options: {
+                    files: ['demo/aDemo.spec.js', 'demo/demo.spec.js']
+                },
+                detectBrowsers: {
+                    enabled: false
+                }
+            },
             fast: {
                 configFile: 'demo/karma.conf.js',
                 browsers: ['PhantomJS'],
@@ -201,6 +212,7 @@ module.exports = function (grunt) {
 
     // Register tasks.
     grunt.registerTask('test', ['copy:demo', 'jshint', 'karma:success']);
+    grunt.registerTask('concurrency', ['copy:demo', 'jshint', 'karma:concurrency']);
     grunt.registerTask('fast', ['copy:demo', 'karma:fast']);
     grunt.registerTask('short', ['copy:demo', 'karma:short']);
     grunt.registerTask('autowatch', ['copy:demo', 'karma:autowatch']);
@@ -231,6 +243,7 @@ module.exports = function (grunt) {
         'karma:colors',
         'karma:duplicate',
         'karma:mocha',
+        'karma:concurrency',
         'karma:reload'
     ]);
 

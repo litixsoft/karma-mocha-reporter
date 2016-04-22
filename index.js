@@ -233,6 +233,45 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
     }
 
     /**
+     * Prints a single item
+     *
+     * @param {!object} item The item to print
+     * @param {number} depth The depth
+     */
+    function printItem (item, depth) {
+        // only print to output once
+        if (item.name && !item.printed && (!item.skipped || !ignoreSkipped)) {
+            // only print it block when it was ran through all browsers
+            if (item.type === 'it' && !item.isCompleted) {
+                return;
+            }
+
+            // indent
+            var line = repeatString('  ', depth) + item.name;
+
+            // it block
+            if (item.type === 'it') {
+                if (item.skipped) {
+                    // print skipped tests info
+                    line = colors.info.print(chalk.stripColor(line) + ' (skipped)');
+                } else {
+                    // set color to success or error
+                    line = item.success ? colors.success.print(line) : colors.error.print(line);
+                }
+            } else {
+                // print name of a suite block in bold
+                line = chalk.bold(line);
+            }
+
+            // use write method of baseReporter
+            self.write(line + '\n');
+
+            // set item as printed
+            item.printed = true;
+        }
+    }
+
+    /**
      * Writes the test results to the output
      *
      * @param {!object} suite The test suite
@@ -251,44 +290,19 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
                 depth = 1;
             }
 
-            // only print to output once
-            if (item.name && !item.printed && (!item.skipped || !ignoreSkipped)) {
-                // only print it block when it was ran through all browsers
-                if (item.type === 'it' && !item.isCompleted) {
-                    return;
-                }
-
-                // indent
-                var line = repeatString('  ', depth) + item.name;
-
-                // it block
-                if (item.type === 'it') {
-                    if (item.skipped) {
-                        // print skipped tests info
-                        line = colors.info.print(chalk.stripColor(line) + ' (skipped)');
-                    } else {
-                        // set color to success or error
-                        line = item.success ? colors.success.print(line) : colors.error.print(line);
-                    }
-                } else {
-                    // print name of a suite block in bold
-                    line = chalk.bold(line);
-                }
-
-                // use write method of baseReporter
-                self.write(line + '\n');
-
-                // set item as printed
-                item.printed = true;
-            }
-
             if (item.items) {
                 var allChildItemsCompleted = allChildItemsAreCompleted(item.items);
 
                 if (allChildItemsCompleted) {
+                    // print current item because all children are completed
+                    printItem(item, depth);
+
                     // print all child items
                     print(item.items, depth + 1);
                 }
+            } else {
+                // print current item which has no children
+                printItem(item, depth);
             }
         }
     }
