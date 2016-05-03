@@ -63,7 +63,7 @@
         "karma-detect-browsers": "^2.0.2",
         "karma-firefox-launcher": "*",
         "karma-ie-launcher": "*",
-        "karma-jasmine": "^0.3.7",
+        "karma-jasmine": "^1.0.0",
         "karma-mocha": "^1.0.1",
         "karma-opera-launcher": "*",
         "karma-phantomjs-launcher": "1.0.0",
