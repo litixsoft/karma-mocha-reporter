@@ -61,7 +61,7 @@
         "karma-chai": "^0.1.0",
         "karma-chrome-launcher": "*",
         "karma-detect-browsers": "^2.0.2",
-        "karma-firefox-launcher": "*",
+        "karma-firefox-launcher": "1.0.0",
         "karma-ie-launcher": "*",
         "karma-jasmine": "^0.3.7",
         "karma-mocha": "^1.0.1",
