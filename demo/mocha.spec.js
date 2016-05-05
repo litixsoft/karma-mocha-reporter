@@ -8,6 +8,12 @@ describe('A mocha test suite', function () {
         expect(actual).to.equal(expected);
     });
 
+    it('should show a multiline string diff', function () {
+        var expected = 'b\na';
+        var actual = 'a\nb';
+        expect(actual).to.equal(expected);
+    });
+
     it('should show a string diff', function () {
         var expected = 'foo';
         var actual = 'foo bar';
