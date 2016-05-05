@@ -45,7 +45,7 @@ module.exports = function(config) {
 
 ## Options
 ### colors
-**Type:** Object
+**Type:** Object | Boolean
 
 Let's you overwrite the default colors. Possible values are all colors and background colors from [chalk](https://github.com/chalk/chalk#colors).
 
@@ -57,6 +57,7 @@ Value | Description | Default
 `info` | info messages | grey
 `warning` | warn messages | yellow
 `error` | error messages | red
+`false` | disable colors |
 
 ```js
 // karma.conf.js
