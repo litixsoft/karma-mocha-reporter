@@ -228,7 +228,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
                 isCompleted = isCompleted && allChildItemsAreCompleted(item.items);
             }
         });
-        
+
         return isCompleted;
     }
 
@@ -360,6 +360,13 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
                             actual: actual,
                             expected: expected
                         };
+
+                        if (String(err.actual).match(/^".*"$/) && String(err.expected).match(/^".*"$/)) {
+                            try {
+                                err.actual = JSON.parse(err.actual);
+                                err.expected = JSON.parse(err.expected);
+                            } catch(e) {}
+                        }
 
                         // ensure that actual and expected are strings
                         if (!(utils.isString(actual) && utils.isString(expected))) {
@@ -511,7 +518,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
 
                 if (item.count === self.numberOfBrowsers) {
                     item.isCompleted = true;
-                    
+
                     // print results to output when test was ran through all browsers
                     if (outputMode !== 'minimal') {
                         print(self.allResults, depth);
