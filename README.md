@@ -208,6 +208,9 @@ You can preview your changes by running:
     $ npm run demo
 
 ## Release History
+### v2.0.3
+* Fix multiline string diffs
+
 ### v2.0.2
 * Print a test suite with it's child items only after all child items are completed
 
