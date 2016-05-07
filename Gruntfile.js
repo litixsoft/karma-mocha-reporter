@@ -22,6 +22,25 @@ module.exports = function (grunt) {
                 command: './node_modules/karma/bin/karma start demo/karma.conf.js'
             }
         },
+        conventionalChangelog: {
+            options: {
+                changelogOpts: {
+                    preset: 'angular'
+                }
+            },
+            release: {
+                src: 'CHANGELOG.md'
+            }
+        },
+        bump: {
+            options: {
+                files: ['package.json'],
+                updateConfigs: ['pkg'],
+                commitFiles: ['-a'],
+                commitMessage: 'chore: Release v%VERSION%',
+                push: false
+            }
+        },
         karma: {
             demo: {
                 configFile: 'demo/karma.conf.js'
@@ -205,10 +224,15 @@ module.exports = function (grunt) {
     });
 
     // Load tasks.
-    grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-karma');
-    grunt.loadNpmTasks('grunt-shell');
+    require('load-grunt-tasks')(grunt);
+
+    grunt.registerTask('release', 'Bump version, update changelog and tag version', function (version) {
+        grunt.task.run([
+            'bump:' + (version || 'patch') + ':bump-only',
+            'conventionalChangelog:release',
+            'bump-commit'
+        ]);
+    });
 
     // Register tasks.
     grunt.registerTask('test', ['copy:demo', 'jshint', 'karma:success']);

@@ -52,8 +52,10 @@
     "devDependencies": {
         "chai": "^3.5.0",
         "grunt": "^1.0.1",
+        "grunt-bump": "^0.8.0",
         "grunt-contrib-copy": "^1.0.0",
         "grunt-contrib-jshint": "^1.0.0",
+        "grunt-conventional-changelog": "^6.1.0",
         "grunt-karma": "^1.0.0",
         "grunt-shell": "^1.2.1",
         "jasmine-core": "^2.4.1",
@@ -69,6 +71,7 @@
         "karma-phantomjs-launcher": "1.0.0",
         "karma-safari-launcher": "*",
         "karma-safaritechpreview-launcher": "*",
+        "load-grunt-tasks": "^3.5.0",
         "mocha": "^2.4.5",
         "phantomjs-prebuilt": "^2.1.4"
     },
