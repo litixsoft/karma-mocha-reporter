@@ -554,7 +554,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
         self.netTime = 0;
         self.numberOfSlowTests = 0;
         self.numberOfSkippedTests = 0;
-        self.numberOfBrowsers = (config.browsers || []).length;
+        self.numberOfBrowsers = (config.browsers || []).length || 1;
     };
 
     self.onBrowserStart = function (browser) {
