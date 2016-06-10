@@ -1,3 +1,13 @@
+<a name="2.0.4"></a>
+## [2.0.4](https://github.com/litixsoft/karma-mocha-reporter/compare/v2.0.3...v2.0.4) (2016-06-10)
+
+
+### Bug Fixes
+
+* no result output when no browsers are defined in the config ([53e7d65](https://github.com/litixsoft/karma-mocha-reporter/commit/53e7d65)), closes [#53](https://github.com/litixsoft/karma-mocha-reporter/issues/53)
+
+
+
 ### v2.0.3
 * Fix multiline string diffs
 
