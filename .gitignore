@@ -1,4 +1,6 @@
 .idea
+.vscode
 atlassian-ide-plugin.xml
 node_modules
+typings
 *.iml
