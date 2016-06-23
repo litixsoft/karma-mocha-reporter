@@ -68,7 +68,7 @@
         "karma-jasmine": "^1.0.2",
         "karma-mocha": "^1.0.1",
         "karma-opera-launcher": "*",
-        "karma-phantomjs-launcher": "1.0.0",
+        "karma-phantomjs-launcher": "1.0.1",
         "karma-safari-launcher": "*",
         "karma-safaritechpreview-launcher": "*",
         "load-grunt-tasks": "^3.5.0",
