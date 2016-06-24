@@ -57,17 +57,6 @@ module.exports = function (config) {
 
         // report which specs are slower than 500ms
         // CLI --report-slower-than 500
-        reportSlowerThan: 500,
-
-        plugins: [
-            'karma-mocha',
-            'karma-mocha-reporter',
-            'karma-chrome-launcher',
-            'karma-firefox-launcher',
-            'karma-ie-launcher',
-            'karma-safari-launcher',
-            'karma-phantomjs-launcher',
-            'karma-chai'
-        ]
+        reportSlowerThan: 500
     });
 };
