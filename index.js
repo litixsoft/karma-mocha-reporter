@@ -41,7 +41,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
 
     var outputMode = config.mochaReporter.output || 'full';
     var ignoreSkipped = config.mochaReporter.ignoreSkipped || false;
-    var divider = config.mochaReporter.hasOwnProperty('divider') ? config.mochaReporter.divider : '='
+    var divider = config.mochaReporter.hasOwnProperty('divider') ? config.mochaReporter.divider : '=';
     divider = repeatString(divider || '', process.stdout.columns || 80);
 
     // disable chalk when colors is set to false
