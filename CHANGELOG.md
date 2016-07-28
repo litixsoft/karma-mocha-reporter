@@ -2,6 +2,11 @@
 ## [2.0.5](https://github.com/litixsoft/karma-mocha-reporter/compare/v2.0.4...v2.0.5) (2016-07-28)
 
 
+### Bug Fixes
+
+* allows disabling the divider by setting the divider option to '' or false ([25cbe87](https://github.com/litixsoft/karma-mocha-reporter/commit/25cbe87)), closes [#68](https://github.com/litixsoft/karma-mocha-reporter/issues/68)
+
+
 
 <a name="2.0.4"></a>
 ## [2.0.4](https://github.com/litixsoft/karma-mocha-reporter/compare/v2.0.3...v2.0.4) (2016-06-10)
