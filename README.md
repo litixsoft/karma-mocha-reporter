@@ -165,7 +165,7 @@ module.exports = function(config) {
 
 **Default:** 80 equals signs ('=')
 
-The string to output between multiple test runs. Set to empty string to disable
+The string to output between multiple test runs. Set to `false` or empty string to disable
 
 ```js
 // karma.conf.js
