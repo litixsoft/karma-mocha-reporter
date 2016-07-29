@@ -75,6 +75,12 @@ module.exports = function(config) {
         info: 'bgGreen',
         warning: 'cyan',
         error: 'bgRed'
+      },
+      symbols: {
+        success: '+',
+        info: '#',
+        warning: '!',
+        error: 'x'
       }
     },
 
