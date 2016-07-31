@@ -2,6 +2,10 @@
 # [2.1.0](https://github.com/litixsoft/karma-mocha-reporter/compare/v2.0.5...v2.1.0) (2016-07-31)
 
 
+### Features
+
+* Add options `symbols` to overwrite the default symbols ([66e0454](https://github.com/litixsoft/karma-mocha-reporter/commit/66e0454)), closes [#70](https://github.com/litixsoft/karma-mocha-reporter/issues/70)
+
 
 <a name="2.0.5"></a>
 ## [2.0.5](https://github.com/litixsoft/karma-mocha-reporter/compare/v2.0.4...v2.0.5) (2016-07-28)
@@ -12,7 +16,6 @@
 * allows disabling the divider by setting the divider option to '' or false ([25cbe87](https://github.com/litixsoft/karma-mocha-reporter/commit/25cbe87)), closes [#68](https://github.com/litixsoft/karma-mocha-reporter/issues/68)
 
 
-
 <a name="2.0.4"></a>
 ## [2.0.4](https://github.com/litixsoft/karma-mocha-reporter/compare/v2.0.3...v2.0.4) (2016-06-10)
 
@@ -20,7 +23,6 @@
 ### Bug Fixes
 
 * no result output when no browsers are defined in the config ([53e7d65](https://github.com/litixsoft/karma-mocha-reporter/commit/53e7d65)), closes [#53](https://github.com/litixsoft/karma-mocha-reporter/issues/53)
-
 
 
 ### v2.0.3
