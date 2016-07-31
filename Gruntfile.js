@@ -219,6 +219,24 @@ module.exports = function (grunt) {
                 detectBrowsers: {
                     enabled: false
                 }
+            },
+            symbols: {
+                configFile: 'demo/karma.conf.js',
+                browsers: ['PhantomJS'],
+                options: {
+                    files: ['demo/demo2.spec.js'],
+                    mochaReporter: {
+                        symbols: {
+                            success: '+',
+                            info: '#',
+                            warning: '!',
+                            error: 'x'
+                        }
+                    }
+                },
+                detectBrowsers: {
+                    enabled: false
+                }
             }
         }
     });
@@ -250,6 +268,7 @@ module.exports = function (grunt) {
     grunt.registerTask('ignoreSkipped', ['copy:demo', 'karma:ignoreSkipped']);
     grunt.registerTask('piped', ['copy:demo', 'shell:karma']);
     grunt.registerTask('colors', ['copy:demo', 'karma:colors']);
+    grunt.registerTask('symbols', ['copy:demo', 'karma:symbols']);
     grunt.registerTask('duplicate', ['copy:demo', 'karma:duplicate']);
     grunt.registerTask('reload', ['copy:demo', 'karma:reload']);
     grunt.registerTask('mocha', ['copy:demo', 'karma:mocha']);
@@ -265,6 +284,7 @@ module.exports = function (grunt) {
         'shell:karma',
         'karma:noColors',
         'karma:colors',
+        'karma:symbols',
         'karma:duplicate',
         'karma:mocha',
         'karma:concurrency',

@@ -50,24 +50,27 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
     // set color functions
     config.mochaReporter.colors = config.mochaReporter.colors || {};
 
+    // set symbol functions
+    config.mochaReporter.symbols = config.mochaReporter.symbols || {};
+
     // set diff output
     config.mochaReporter.showDiff = config.mochaReporter.showDiff || false;
 
     var colors = {
         success: {
-            symbol: symbols.success,
+            symbol: config.mochaReporter.symbols.success || symbols.success,
             print: chalk[config.mochaReporter.colors.success] || chalk.green
         },
         info: {
-            symbol: symbols.info,
+            symbol: config.mochaReporter.symbols.info || symbols.info,
             print: chalk[config.mochaReporter.colors.info] || chalk.grey
         },
         warning: {
-            symbol: symbols.warning,
+            symbol: config.mochaReporter.symbols.warning || symbols.warning,
             print: chalk[config.mochaReporter.colors.warning] || chalk.yellow
         },
         error: {
-            symbol: symbols.error,
+            symbol: config.mochaReporter.symbols.error || symbols.error,
             print: chalk[config.mochaReporter.colors.error] || chalk.red
         }
     };
