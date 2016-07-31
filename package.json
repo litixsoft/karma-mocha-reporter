@@ -74,7 +74,7 @@
         "karma-safaritechpreview-launcher": "*",
         "load-grunt-tasks": "^3.5.0",
         "mocha": "^2.5.3",
-        "phantomjs-prebuilt": "^2.1.8"
+        "phantomjs-prebuilt": "^2.1.9"
     },
     "dependencies": {
         "chalk": "1.1.3"

@@ -15,7 +15,7 @@ The easiest way is to keep `karma-mocha-reporter` as a devDependency in your `pa
 ```json
 {
   "devDependencies": {
-    "karma": "^0.13",
+    "karma": "^1.0.0",
     "karma-mocha-reporter": "^2.0.0"
   }
 }
@@ -33,12 +33,7 @@ module.exports = function(config) {
     frameworks: ['jasmine'],
 
     // reporters configuration
-    reporters: ['mocha'],
-
-    plugins: [
-      'karma-jasmine',
-      'karma-mocha-reporter'
-    ]
+    reporters: ['mocha']
   });
 };
 ```
@@ -82,12 +77,43 @@ module.exports = function(config) {
         warning: '!',
         error: 'x'
       }
-    },
+    }
+  });
+};
+```
 
-    plugins: [
-      'karma-jasmine',
-      'karma-mocha-reporter'
-    ]
+### symbols
+**Type:** Object
+
+Let's you overwrite the default symbols.
+
+**Possible Values:**
+
+Value | Description | Default
+------ | ----------- | -------
+`success` | success messages | ✔
+`info` | info messages | ℹ
+`warning` | warn messages | ⚠
+`error` | error messages | ✖
+
+```js
+// karma.conf.js
+module.exports = function(config) {
+  config.set({
+    frameworks: ['jasmine'],
+
+    // reporters configuration
+    reporters: ['mocha'],
+
+    // reporter options
+    mochaReporter: {
+      symbols: {
+        success: '+',
+        info: '#',
+        warning: '!',
+        error: 'x'
+      }
+    }
   });
 };
 ```
@@ -116,12 +142,7 @@ module.exports = function(config) {
     // reporter options
     mochaReporter: {
       output: 'autowatch'
-    },
-
-    plugins: [
-      'karma-jasmine',
-      'karma-mocha-reporter'
-    ]
+    }
   });
 };
 ```
@@ -155,13 +176,7 @@ module.exports = function(config) {
     // reporter options
     mochaReporter: {
       showDiff: true
-    },
-
-    plugins: [
-      'karma-chai',
-      'karma-mocha',
-      'karma-mocha-reporter'
-    ]
+    }
   });
 };
 ```
@@ -185,12 +200,7 @@ module.exports = function(config) {
     // reporter options
     mochaReporter: {
       divider: ''
-    },
-
-    plugins: [
-      'karma-jasmine',
-      'karma-mocha-reporter'
-    ]
+    }
   });
 };
 ```
