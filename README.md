@@ -52,7 +52,6 @@ Value | Description | Default
 `info` | info messages | grey
 `warning` | warn messages | yellow
 `error` | error messages | red
-`false` | disable colors |
 
 ```js
 // karma.conf.js
@@ -78,6 +77,23 @@ module.exports = function(config) {
         error: 'x'
       }
     }
+  });
+};
+```
+
+To disable the colors please use the `colors` option in the karma config.
+
+```js
+// karma.conf.js
+module.exports = function(config) {
+  config.set({
+    frameworks: ['jasmine'],
+
+    // reporters configuration
+    reporters: ['mocha'],
+
+    // disable colors
+    colors: false
   });
 };
 ```
