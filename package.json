@@ -2,7 +2,7 @@
     "name": "karma-mocha-reporter",
     "description": "Karma reporter with mocha style logging.",
     "version": "2.1.0",
-    "homepage": "http://www.litixsoft.de/modules-karmamochareporter",
+    "homepage": "http://www.litixsoft.de/index.php?lang=en#modules",
     "author": "Litixsoft GmbH <info@litixsoft.de> (http://www.litixsoft.de)",
     "maintainers": [
         "Timo Liebetrau <t.liebetrau@litixsoft.de>",
@@ -36,7 +36,10 @@
     "keywords": [
         "karma-plugin",
         "karma-reporter",
-        "mocha"
+        "mocha",
+        "chai",
+        "diff",
+        "symbols"
     ],
     "license": "MIT",
     "licenses": [
