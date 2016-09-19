@@ -231,6 +231,11 @@ module.exports = function(config) {
 When setting the ignoreSkipped flag to true, the reporter will ignore the skipped tests in the output and you will see
 only the tests that where really executed. The summary will still contain the number of skipped tests.
 
+### maxLogLines
+**Type:** Number
+
+Let's you set the maximum number of lines which are printed for a failure. The default value is 999. Helps to cut long stack traces.
+
 
 ## Contributing
 In lieu of a formal styleguide take care to maintain the existing coding style. Lint and test your code using [grunt](http://gruntjs.com/).

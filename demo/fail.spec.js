@@ -13,4 +13,29 @@ describe('Fail demo test suite', function () {
         expect(3).toBe(0);
         expect(4).toBe(0);
     });
+
+    describe('test', function () {
+        beforeEach(function () {
+            foo = {
+                setBar: function (value) {
+                    bar = value;
+                }
+            };
+
+            spyOn(foo, 'setBar');
+
+            foo.setBar(123);
+            foo.setBar(456, 'another param');
+        });
+
+        it("tracks that the spy was called", function () {
+            expect(foo.setBar).toHaveBeenCalled();
+            expect(foo.setBar.calls.count()).toEqual(3);
+        });
+
+        it("tracks all the arguments of its calls", function () {
+            expect(foo.setBar).toHaveBeenCalledWith(123);
+            expect(foo.setBar).toHaveBeenCalledWith(456, 'another param');
+        });
+    });
 });

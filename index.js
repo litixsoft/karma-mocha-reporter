@@ -26,7 +26,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
      * @param {!number} n The number of times the string should be repeated.
      * @returns {string}
      */
-    function repeatString (text, n) {
+    function repeatString(text, n) {
         var res = [];
         var i;
 
@@ -75,6 +75,14 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
         }
     };
 
+    // init max number of log lines
+    config.mochaReporter.maxLogLines = config.mochaReporter.maxLogLines || 999;
+
+    if (isNaN(config.mochaReporter.maxLogLines)) {
+        self.write(colors.warning.print('Option "config.mochaReporter.maxLogLines" must be of type number. Default value 999 is used!'))
+        config.mochaReporter.maxLogLines = 999;
+    }
+
     // check if mocha is installed when showDiff is enabled
     if (config.mochaReporter.showDiff) {
         try {
@@ -86,7 +94,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
         }
     }
 
-    function getLogSymbol (color) {
+    function getLogSymbol(color) {
         return chalk.enabled ? color.print(color.symbol) : chalk.stripColor(color.symbol);
     }
 
@@ -96,10 +104,10 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
      * @param {Error} err with actual/expected
      * @return {string} The diff.
      */
-    function unifiedDiff (err) {
+    function unifiedDiff(err) {
         var indent = '      ';
 
-        function cleanUp (line) {
+        function cleanUp(line) {
             if (line[0] === '+') {
                 return indent + colors.success.print(line);
             }
@@ -115,7 +123,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
             return indent + line;
         }
 
-        function notBlank (line) {
+        function notBlank(line) {
             return line !== null;
         }
 
@@ -135,7 +143,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
      * @param {string} type
      * @return {string}
      */
-    function errorDiff (err, type) {
+    function errorDiff(err, type) {
         var actual = err.actual;
         var expected = err.expected;
         return diff['diff' + type](actual, expected).map(function (str) {
@@ -156,7 +164,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
      * @param {string} len
      * @return {string}
      */
-    function pad (str, len) {
+    function pad(str, len) {
         str = String(str);
         return Array(len - str.length + 1).join(' ') + str;
     }
@@ -167,7 +175,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
      * @param {Error} err with actual/expected
      * @return {string} Diff
      */
-    function inlineDiff (err) {
+    function inlineDiff(err) {
         var msg = errorDiff(err, 'WordsWithSpace');
 
         // linenos
@@ -199,7 +207,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
      * @param {!number} time The time.
      * @returns {string}
      */
-    function formatTimeInterval (time) {
+    function formatTimeInterval(time) {
         var mins = Math.floor(time / 60000);
         var secs = (time - mins * 60000) / 1000;
         var str = secs + (secs === 1 ? ' sec' : ' secs');
@@ -217,11 +225,11 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
      * @param {object} items The item objects
      * @returns {boolean}
      */
-    function allChildItemsAreCompleted (items) {
+    function allChildItemsAreCompleted(items) {
         var item;
         var isCompleted = true;
 
-        Object.keys(items).forEach(function(key){
+        Object.keys(items).forEach(function (key) {
             item = items[key];
 
             if (item.type === 'it') {
@@ -241,7 +249,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
      * @param {!object} item The item to print
      * @param {number} depth The depth
      */
-    function printItem (item, depth) {
+    function printItem(item, depth) {
         // only print to output once
         if (item.name && !item.printed && (!item.skipped || !ignoreSkipped)) {
             // only print it block when it was ran through all browsers
@@ -280,7 +288,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
      * @param {!object} suite The test suite
      * @param {number=} depth The indention.
      */
-    function print (suite, depth) {
+    function print(suite, depth) {
         var keys = Object.keys(suite);
         var length = keys.length;
         var i, item;
@@ -316,7 +324,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
      * @param {!object} suite The test suite
      * @param {number=} depth The indention.
      */
-    function printFailures (suite, depth) {
+    function printFailures(suite, depth) {
         var keys = Object.keys(suite);
         var length = keys.length;
         var i, item;
@@ -347,10 +355,17 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
 
                     // add the error log in error color
                     item.log = item.log || [];
+                    var log = item.log[0].split('\n');
+                    var linesToLog = config.mochaReporter.maxLogLines;
+                    var ii = 0;
+
+                    // set number of lines to output
+                    if (log.length < linesToLog) {
+                        linesToLog = log.length;
+                    }
 
                     // print diff
                     if (config.mochaReporter.showDiff && item.assertionErrors && item.assertionErrors[0]) {
-                        var log = item.log[0].split('\n');
                         var errorMessage = log.splice(0, 1)[0];
 
                         // print error message before diff
@@ -368,7 +383,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
                             try {
                                 err.actual = JSON.parse(err.actual);
                                 err.expected = JSON.parse(err.expected);
-                            } catch(e) {}
+                            } catch (e) { }
                         }
 
                         // ensure that actual and expected are strings
@@ -383,13 +398,13 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
                         line += diff + '\n';
 
                         // print formatted stack trace after diff
-                        log.forEach(function (err) {
-                            line += colors.error.print(formatError(err));
-                        });
+                        for (ii; ii < linesToLog; ii++) {
+                            line += colors.error.print(formatError(log[ii]));
+                        }
                     } else {
-                        item.log.forEach(function (err) {
-                            line += colors.error.print(formatError(err, repeatString('  ', depth)));
-                        });
+                        for (ii; ii < linesToLog; ii++) {
+                            line += colors.error.print(formatError(log[ii], repeatString('  ', depth)));
+                        }
                     }
                 }
 
@@ -410,7 +425,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
      * @param {!Object} obj
      * @returns {Array}
      */
-    function listAllObjectProperties (obj) {
+    function listAllObjectProperties(obj) {
         var objectToInspect;
         var result = [];
 
@@ -427,7 +442,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
      * @param {!Number} testCount
      * @returns {String}
      */
-    function getTestNounFor (testCount) {
+    function getTestNounFor(testCount) {
         if (testCount === 1) {
             return 'test';
         }
@@ -441,7 +456,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
      * @param {!String} property
      * @returns {boolean}
      */
-    function isReservedProperty (obj, property) {
+    function isReservedProperty(obj, property) {
         return listAllObjectProperties(Object.getPrototypeOf(obj)).indexOf(property) > -1;
     }
 
@@ -451,7 +466,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
      * @param {!object} browser The current browser.
      * @param {!object} result The result of the test.
      */
-    function specComplete (browser, result) {
+    function specComplete(browser, result) {
         // complete path of the test
         var path = [].concat(result.suite, result.description);
         var maxDepth = path.length - 1;

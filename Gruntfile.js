@@ -150,6 +150,9 @@ module.exports = function (grunt) {
                 options: {
                     files: ['demo/fail.spec.js']
                 },
+                mochaReporter: {
+                    maxLogLines: 2
+                },
                 detectBrowsers: {
                     enabled: false
                 }
