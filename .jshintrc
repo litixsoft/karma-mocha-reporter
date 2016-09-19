@@ -17,6 +17,7 @@
     "node": true,
     "globals": {
         "assert": false,
+        "beforeEach": false,
         "describe": false,
         "fdescribe": false,
         "expect": false,
@@ -27,6 +28,7 @@
         "waitsFor": false,
         "xit": false,
         "xdescribe": false,
-        "window": false
+        "window": false,
+        "spyOn": false
     }
 }

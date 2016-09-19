@@ -79,7 +79,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
     config.mochaReporter.maxLogLines = config.mochaReporter.maxLogLines || 999;
 
     if (isNaN(config.mochaReporter.maxLogLines)) {
-        self.write(colors.warning.print('Option "config.mochaReporter.maxLogLines" must be of type number. Default value 999 is used!'))
+        self.write(colors.warning.print('Option "config.mochaReporter.maxLogLines" must be of type number. Default value 999 is used!'));
         config.mochaReporter.maxLogLines = 999;
     }
 

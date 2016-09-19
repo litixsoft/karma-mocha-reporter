@@ -15,6 +15,8 @@ describe('Fail demo test suite', function () {
     });
 
     describe('test', function () {
+        var foo, bar;
+
         beforeEach(function () {
             foo = {
                 setBar: function (value) {
@@ -28,12 +30,12 @@ describe('Fail demo test suite', function () {
             foo.setBar(456, 'another param');
         });
 
-        it("tracks that the spy was called", function () {
+        it('tracks that the spy was called', function () {
             expect(foo.setBar).toHaveBeenCalled();
             expect(foo.setBar.calls.count()).toEqual(3);
         });
 
-        it("tracks all the arguments of its calls", function () {
+        it('tracks all the arguments of its calls', function () {
             expect(foo.setBar).toHaveBeenCalledWith(123);
             expect(foo.setBar).toHaveBeenCalledWith(456, 'another param');
         });
