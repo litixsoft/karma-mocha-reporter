@@ -1,3 +1,13 @@
+<a name="2.2.0"></a>
+# [2.2.0](https://github.com/litixsoft/karma-mocha-reporter/compare/v2.1.0...v2.2.0) (2016-09-19)
+
+
+### Features
+
+* add option "maxLogLines" to control the number of lines which are printed for the failures ([0c484df](https://github.com/litixsoft/karma-mocha-reporter/commit/0c484df)), closes [#75](https://github.com/litixsoft/karma-mocha-reporter/issues/75)
+
+
+
 <a name="2.1.0"></a>
 # [2.1.0](https://github.com/litixsoft/karma-mocha-reporter/compare/v2.0.5...v2.1.0) (2016-07-31)
 
