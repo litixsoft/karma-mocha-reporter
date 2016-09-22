@@ -235,7 +235,7 @@ only the tests that where really executed. The summary will still contain the nu
 **Type:** Number
 
 Let's you set the maximum number of lines which are printed for a failure. The default value is 999. Helps to cut long stack traces.
-Set the value to -1 to disable stake traces.
+Set the value to `-1` to disable stack traces.
 
 
 ## Contributing
