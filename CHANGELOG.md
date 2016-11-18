@@ -1,3 +1,14 @@
+<a name="2.2.1"></a>
+## [2.2.1](https://github.com/litixsoft/karma-mocha-reporter/compare/v2.2.0...v2.2.1) (2016-11-18)
+
+
+### Bug Fixes
+
+* log can be an empty array ([5f08bbd](https://github.com/litixsoft/karma-mocha-reporter/commit/5f08bbd))
+* log can be empty ([008569a](https://github.com/litixsoft/karma-mocha-reporter/commit/008569a))
+
+
+
 <a name="2.2.0"></a>
 # [2.2.0](https://github.com/litixsoft/karma-mocha-reporter/compare/v2.1.0...v2.2.0) (2016-09-19)
 
