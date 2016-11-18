@@ -355,7 +355,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
 
                     // add the error log in error color
                     item.log = item.log || [];
-                    var log = item.log[0].split('\n');
+                    var log = item.log.length ? item.log[0].split('\n') : [];
                     var linesToLog = config.mochaReporter.maxLogLines;
                     var ii = 0;
 
