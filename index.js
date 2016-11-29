@@ -594,7 +594,8 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
 
         isRunCompleted = true;
 
-        self.write('\n' + colors.success.print('Finished in ' + formatTimeInterval(self.totalTime) + ' / ' + formatTimeInterval(self.netTime)));
+        self.write('\n' + colors.success.print('Finished in ' + formatTimeInterval(self.totalTime) + ' / ' +
+                   formatTimeInterval(self.netTime) + ' @ ' + new Date().toTimeString()));
         self.write('\n\n');
 
         if (browsers.length > 0 && !results.disconnected) {
