@@ -63,7 +63,7 @@
         "grunt-karma": "^2.0.0",
         "grunt-shell": "^2.0.0",
         "jasmine-core": "^2.5.2",
-        "karma": ">=0.13",
+        "karma": ">=1.4.0",
         "karma-chai": "^0.1.0",
         "karma-chrome-launcher": "*",
         "karma-detect-browsers": "^2.1.0",
