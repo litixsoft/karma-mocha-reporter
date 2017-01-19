@@ -1,3 +1,19 @@
+<a name="2.2.2"></a>
+## [2.2.2](https://github.com/litixsoft/karma-mocha-reporter/compare/v2.2.0...v2.2.2) (2017-01-19)
+
+
+### Bug Fixes
+
+* log can be an empty array ([5f08bbd](https://github.com/litixsoft/karma-mocha-reporter/commit/5f08bbd))
+* log can be empty ([008569a](https://github.com/litixsoft/karma-mocha-reporter/commit/008569a))
+
+
+### Features
+
+* add option printFirstSuccess\nCloses [#87](https://github.com/litixsoft/karma-mocha-reporter/issues/87)\n* useful when having conditional, browser specific tests ([9e2f342](https://github.com/litixsoft/karma-mocha-reporter/commit/9e2f342))
+
+
+
 <a name="2.2.1"></a>
 ## [2.2.1](https://github.com/litixsoft/karma-mocha-reporter/compare/v2.2.0...v2.2.1) (2016-11-18)
 
