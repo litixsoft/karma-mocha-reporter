@@ -240,7 +240,20 @@ module.exports = function (grunt) {
                 detectBrowsers: {
                     enabled: false
                 }
-            }
+            },
+            firstSuccess: {
+                configFile: 'demo/karma.conf.js',
+                browsers: ['PhantomJS', 'Firefox'],
+                options: {
+                    files: ['demo/firstSuccess.spec.js'],
+                    mochaReporter: {
+                        printFirstSuccess: true
+                    }
+                },
+                detectBrowsers: {
+                    enabled: false
+                }
+            },
         }
     });
 
@@ -259,6 +272,7 @@ module.exports = function (grunt) {
     grunt.registerTask('test', ['copy:demo', 'jshint', 'karma:success']);
     grunt.registerTask('concurrency', ['copy:demo', 'jshint', 'karma:concurrency']);
     grunt.registerTask('fast', ['copy:demo', 'karma:fast']);
+    grunt.registerTask('firstSuccess', ['copy:demo', 'karma:firstSuccess']);
     grunt.registerTask('short', ['copy:demo', 'karma:short']);
     grunt.registerTask('autowatch', ['copy:demo', 'karma:autowatch']);
     grunt.registerTask('minimal', ['copy:demo', 'karma:minimal']);
@@ -281,6 +295,7 @@ module.exports = function (grunt) {
         'karma:singleBrowser',
         'karma:demo',
         'karma:success',
+        'karma:firstSuccess',
         'karma:fail',
         'karma:failInOneBrowser',
         'karma:printNoFailures',

@@ -237,6 +237,33 @@ only the tests that where really executed. The summary will still contain the nu
 Let's you set the maximum number of lines which are printed for a failure. The default value is 999. Helps to cut long stack traces.
 Set the value to `-1` to disable stack traces.
 
+### printFirstSuccess
+**Type:** Boolean
+
+**Possible Values:**
+  * `false` (default)
+  * `true`
+
+Prints the result of an it block after it is run in one browser. This options is useful when you have tests which are conditionally run in one browser only.
+Otherwise the result of the it block would not be printed because it was not run in all browsers.
+
+```js
+// testfile.spec.js
+if (navigator.userAgent.match(/firefox/i)) {
+  describe('Firefox tests', function() {
+    it('this would only be reported when printFirstSuccess is true', function() {
+      console.log('firefox test');
+    });
+  });
+}
+
+describe('Other tests', function() {
+  it('this should be always reported', function() {
+    console.log('hello world');
+  });
+});
+```
+
 
 ## Contributing
 In lieu of a formal styleguide take care to maintain the existing coding style. Lint and test your code using [grunt](http://gruntjs.com/).
@@ -249,7 +276,7 @@ You can preview your changes by running:
 [Litixsoft GmbH](http://www.litixsoft.de)
 
 ## License
-Copyright (C) 2013-2016 Litixsoft GmbH <info@litixsoft.de>
+Copyright (C) 2013-2017 Litixsoft GmbH <info@litixsoft.de>
 Licensed under the MIT license.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

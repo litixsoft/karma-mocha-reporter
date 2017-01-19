@@ -56,6 +56,9 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
     // set diff output
     config.mochaReporter.showDiff = config.mochaReporter.showDiff || false;
 
+    // print first successful result
+    config.mochaReporter.printFirstSuccess = config.mochaReporter.printFirstSuccess || false;
+
     var colors = {
         success: {
             symbol: config.mochaReporter.symbols.success || symbols.success,
@@ -534,7 +537,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
                     self.numberOfSlowTests++;
                 }
 
-                if (item.count === self.numberOfBrowsers) {
+                if (item.count === self.numberOfBrowsers || config.mochaReporter.printFirstSuccess) {
                     item.isCompleted = true;
 
                     // print results to output when test was ran through all browsers
@@ -595,7 +598,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
         isRunCompleted = true;
 
         self.write('\n' + colors.success.print('Finished in ' + formatTimeInterval(self.totalTime) + ' / ' +
-                   formatTimeInterval(self.netTime) + ' @ ' + new Date().toTimeString()));
+            formatTimeInterval(self.netTime) + ' @ ' + new Date().toTimeString()));
         self.write('\n\n');
 
         if (browsers.length > 0 && !results.disconnected) {
