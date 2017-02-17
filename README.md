@@ -21,7 +21,7 @@ The easiest way is to keep `karma-mocha-reporter` as a devDependency in your `pa
 }
 ```
 
-You can simple do it by:
+You can simply do it by:
 
     $ npm install karma-mocha-reporter --save-dev
 
@@ -42,7 +42,7 @@ module.exports = function(config) {
 ### colors
 **Type:** Object | Boolean
 
-Let's you overwrite the default colors. Possible values are all colors and background colors from [chalk](https://github.com/chalk/chalk#colors).
+Lets you overwrite the default colors. Possible values are all colors and background colors from [chalk](https://github.com/chalk/chalk#colors).
 
 **Possible Values:**
 
@@ -101,7 +101,7 @@ module.exports = function(config) {
 ### symbols
 **Type:** Object
 
-Let's you overwrite the default symbols.
+Lets you overwrite the default symbols.
 
 **Possible Values:**
 
@@ -234,7 +234,7 @@ only the tests that where really executed. The summary will still contain the nu
 ### maxLogLines
 **Type:** Number
 
-Let's you set the maximum number of lines which are printed for a failure. The default value is 999. Helps to cut long stack traces.
+Lets you set the maximum number of lines which are printed for a failure. The default value is 999. Helps to cut long stack traces.
 Set the value to `-1` to disable stack traces.
 
 ### printFirstSuccess
