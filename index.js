@@ -18,6 +18,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
     var self = this;
     var firstRun = true;
     var isRunCompleted = false;
+    var internalPrefix = '$%$';
 
     /**
      * Returns the text repeated n times.
@@ -261,7 +262,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
             }
 
             // indent
-            var line = repeatString('  ', depth) + item.name;
+            var line = repeatString('  ', depth) + item.name.replace(internalPrefix, '');
 
             // it block
             if (item.type === 'it') {
@@ -343,7 +344,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
             // only print to output when test failed
             if (item.name && !item.success && !item.skipped) {
                 // indent
-                var line = repeatString('  ', depth) + item.name;
+                var line = repeatString('  ', depth) + item.name.replace(internalPrefix, '');
 
                 // it block
                 if (item.type === 'it') {
@@ -423,23 +424,6 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
     }
 
     /**
-     * Returns all properties of the given object
-     *
-     * @param {!Object} obj
-     * @returns {Array}
-     */
-    function listAllObjectProperties(obj) {
-        var objectToInspect;
-        var result = [];
-
-        for (objectToInspect = obj; objectToInspect !== null; objectToInspect = Object.getPrototypeOf(objectToInspect)) {
-            result = result.concat(Object.getOwnPropertyNames(objectToInspect));
-        }
-
-        return result;
-    }
-
-    /**
      * Returns a singularized or plularized noun for "test" based on test count
      *
      * @param {!Number} testCount
@@ -450,17 +434,6 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
             return 'test';
         }
         return 'tests';
-    }
-
-    /**
-     * Returns if the property is an reserverd object property
-     *
-     * @param {!Object} obj
-     * @param {!String} property
-     * @returns {boolean}
-     */
-    function isReservedProperty(obj, property) {
-        return listAllObjectProperties(Object.getPrototypeOf(obj)).indexOf(property) > -1;
     }
 
     /**
@@ -475,11 +448,8 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
         var maxDepth = path.length - 1;
 
         path.reduce(function (suite, description, depth) {
-            if (isReservedProperty(suite, description)) {
-                self.write(colors.warning.print('Reserved name for ' + (depth === maxDepth ? 'it' : 'describe') + ' block (' + description + ')! Please use an other name, otherwise the result are not printed correctly'));
-                self.write('\n');
-                return {};
-            }
+            // add prefix to description to prevent errors when the description is a reserved name (e.g. 'toString' or 'hasOwnProperty')
+            description = internalPrefix + description;
 
             var item;
 
