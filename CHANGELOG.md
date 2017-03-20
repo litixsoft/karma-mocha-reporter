@@ -1,3 +1,13 @@
+<a name="2.2.3"></a>
+## [2.2.3](https://github.com/litixsoft/karma-mocha-reporter/compare/v2.2.2...v2.2.3) (2017-03-20)
+
+
+### Bug Fixes
+
+* allow to use reserved prototype names as name for describe or it blocks ([81d6de6](https://github.com/litixsoft/karma-mocha-reporter/commit/81d6de6)), closes [#94](https://github.com/litixsoft/karma-mocha-reporter/issues/94)
+
+
+
 <a name="2.2.2"></a>
 ## [2.2.2](https://github.com/litixsoft/karma-mocha-reporter/compare/v2.2.0...v2.2.2) (2017-01-19)
 
