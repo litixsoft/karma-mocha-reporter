@@ -2,6 +2,7 @@
 
 var chalk = require('chalk');
 var symbols = require('log-symbols');
+var stripAnsi = require('strip-ansi');
 
 /**
  * The MochaReporter.
@@ -62,19 +63,19 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
 
     var colors = {
         success: {
-            symbol: config.mochaReporter.symbols.success || chalk.stripColor(symbols.success),
+            symbol: config.mochaReporter.symbols.success || stripAnsi(symbols.success),
             print: chalk[config.mochaReporter.colors.success] || chalk.green
         },
         info: {
-            symbol: config.mochaReporter.symbols.info || chalk.stripColor(symbols.info),
+            symbol: config.mochaReporter.symbols.info || stripAnsi(symbols.info),
             print: chalk[config.mochaReporter.colors.info] || chalk.grey
         },
         warning: {
-            symbol: config.mochaReporter.symbols.warning || chalk.stripColor(symbols.warning),
+            symbol: config.mochaReporter.symbols.warning || stripAnsi(symbols.warning),
             print: chalk[config.mochaReporter.colors.warning] || chalk.yellow
         },
         error: {
-            symbol: config.mochaReporter.symbols.error || chalk.stripColor(symbols.error),
+            symbol: config.mochaReporter.symbols.error || stripAnsi(symbols.error),
             print: chalk[config.mochaReporter.colors.error] || chalk.red
         }
     };
@@ -99,7 +100,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
     }
 
     function getLogSymbol(color) {
-        return chalk.enabled ? color.print(color.symbol) : chalk.stripColor(color.symbol);
+        return chalk.enabled ? color.print(color.symbol) : stripAnsi(color.symbol);
     }
 
     /**
@@ -268,7 +269,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
             if (item.type === 'it') {
                 if (item.skipped) {
                     // print skipped tests info
-                    line = colors.info.print(chalk.stripColor(line) + ' (skipped)');
+                    line = colors.info.print(stripAnsi(line) + ' (skipped)');
                 } else {
                     // set color to success or error
                     line = item.success ? colors.success.print(line) : colors.error.print(line);

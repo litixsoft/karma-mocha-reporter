@@ -81,7 +81,8 @@
     },
     "dependencies": {
         "chalk": "^2.1.0",
-        "log-symbols": "^2.0.0"
+        "log-symbols": "^2.0.0",
+        "strip-ansi": "^4.0.0"
     },
     "peerDependencies": {
         "karma": ">=0.13"
