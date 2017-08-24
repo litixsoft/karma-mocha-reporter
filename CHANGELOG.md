@@ -1,3 +1,13 @@
+<a name="2.2.4"></a>
+## [2.2.4](https://github.com/litixsoft/karma-mocha-reporter/compare/v2.2.3...v2.2.4) (2017-08-24)
+
+
+### Features
+
+* use log-symbols package ([b0aac74](https://github.com/litixsoft/karma-mocha-reporter/commit/b0aac74))
+
+
+
 <a name="2.2.3"></a>
 ## [2.2.3](https://github.com/litixsoft/karma-mocha-reporter/compare/v2.2.2...v2.2.3) (2017-03-20)
 
