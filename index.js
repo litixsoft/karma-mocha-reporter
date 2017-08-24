@@ -1,7 +1,7 @@
 'use strict';
 
 var chalk = require('chalk');
-var symbols = require('./symbols');
+var symbols = require('log-symbols');
 
 /**
  * The MochaReporter.
@@ -62,19 +62,19 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
 
     var colors = {
         success: {
-            symbol: config.mochaReporter.symbols.success || symbols.success,
+            symbol: config.mochaReporter.symbols.success || chalk.stripColor(symbols.success),
             print: chalk[config.mochaReporter.colors.success] || chalk.green
         },
         info: {
-            symbol: config.mochaReporter.symbols.info || symbols.info,
+            symbol: config.mochaReporter.symbols.info || chalk.stripColor(symbols.info),
             print: chalk[config.mochaReporter.colors.info] || chalk.grey
         },
         warning: {
-            symbol: config.mochaReporter.symbols.warning || symbols.warning,
+            symbol: config.mochaReporter.symbols.warning || chalk.stripColor(symbols.warning),
             print: chalk[config.mochaReporter.colors.warning] || chalk.yellow
         },
         error: {
-            symbol: config.mochaReporter.symbols.error || symbols.error,
+            symbol: config.mochaReporter.symbols.error || chalk.stripColor(symbols.error),
             print: chalk[config.mochaReporter.colors.error] || chalk.red
         }
     };
