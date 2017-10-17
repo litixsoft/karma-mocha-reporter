@@ -1,3 +1,13 @@
+<a name="2.2.5"></a>
+## [2.2.5](https://github.com/litixsoft/karma-mocha-reporter/compare/v2.2.4...v2.2.5) (2017-10-17)
+
+
+### Bug Fixes
+
+* use latest version of log-symbols to fix problems on Windows 10 ([4beec39](https://github.com/litixsoft/karma-mocha-reporter/commit/4beec39)), closes [#101](https://github.com/litixsoft/karma-mocha-reporter/issues/101)
+
+
+
 <a name="2.2.4"></a>
 ## [2.2.4](https://github.com/litixsoft/karma-mocha-reporter/compare/v2.2.3...v2.2.4) (2017-08-24)
 
