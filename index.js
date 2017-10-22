@@ -44,6 +44,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
     var outputMode = config.mochaReporter.output || 'full';
     var ignoreSkipped = config.mochaReporter.ignoreSkipped || false;
     var divider = config.mochaReporter.hasOwnProperty('divider') ? config.mochaReporter.divider : '=';
+    var showPassedTests = config.mochaReporter.showPassedTests === undefined ? true : !!config.mochaReporter.showPassedTests;
     divider = repeatString(divider || '', process.stdout.columns || 80);
 
     // disable chalk when colors is set to false
@@ -256,7 +257,7 @@ var MochaReporter = function (baseReporterDecorator, formatError, config) {
      */
     function printItem(item, depth) {
         // only print to output once
-        if (item.name && !item.printed && (!item.skipped || !ignoreSkipped)) {
+        if (item.name && !item.printed && (!item.skipped || !ignoreSkipped) && (!item.success || showPassedTests)) {
             // only print it block when it was ran through all browsers
             if (item.type === 'it' && !item.isCompleted) {
                 return;
